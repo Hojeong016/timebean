@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "ranking")
-public class Ranking {
+public class Ranking implements Comparable<Ranking>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -70,5 +70,10 @@ public class Ranking {
 
     public void setRegDate(LocalDate regDate) {
         this.regDate = regDate;
+    }
+
+    @Override
+    public int compareTo(Ranking o) {
+        return Integer.compare(o.getTotalTime(), this.getTotalTime());
     }
 }

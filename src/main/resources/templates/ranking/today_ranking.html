@@ -2,38 +2,62 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Today's Ranking</title>
+    <title>Today's Top3 Ranking</title>
     <style>
         /* 수평 가운데 정렬 */
         body {
             display: flex;
             justify-content: center;
             height: 100vh;
+            position: relative;
         }
         .content {
             text-align: center;
         }
-    </style>
+        /* 로그인 및 회원가입 버튼 스타일 */
+        .login-button, .signup-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #FFD8E6; /* 연한 분홍색 */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px; /* 모서리를 둥글게 */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .login-button {
+            /* 로그인 버튼에 대한 스타일 */
+            margin-right: 100px; /* 회원가입 버튼과의 간격 조정 */
+        }
+        .login-button:hover, .signup-button:hover {
+            background-color: #FFFFFF; /* 버튼을 누르면 하얀색으로 변함 */
+        }
     </style>
 </head>
 <body>
 <div class="content">
-    <h1>Today's Ranking</h1>
+    <h1>Today's Top3 Ranking</h1>
     <table border="1">
         <thead>
         <tr>
+            <th>Rank</th>
             <th>Name</th>
             <th>Total Time</th>
         </tr>
         </thead>
         <tbody>
         <!-- 랭킹 목록을 순회하며 출력 -->
-        <tr th:each="rank : ${todayRankingList}">
+        <tr th:each="rank, status : ${todayRankingList}">
+            <td th:text="${status.index + 1}"></td>
             <td th:text="${rank.nickname}"></td>
             <td th:text="${rank.totalTime}"></td>
         </tr>
         </tbody>
     </table>
+    <!-- 로그인 및 회원가입 버튼 -->
+    <button class="login-button" onclick="window.location.href='login.html'">로그인</button>
+    <button class="signup-button" onclick="window.location.href='signup.html'">회원가입</button>
 </div>
 </body>
 </html>
