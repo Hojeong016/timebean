@@ -1,18 +1,37 @@
-package com.hj.timebean.domain;
+package com.hj.timebean.entity;
 
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "member")
 public class Member {
-    long id;
-    String memberId;
-    String password;
-    String nickname;
-    String regDate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public Member(long id, String memberId, String password, String nickname, String regDate) {
+    @Column(name = "member_id")
+    private String memberId;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "nickname")
+    private String nickname;
+
+    @Column(name = "reg_date")
+    private LocalDate regDate;
+
+    public Member(long id, String memberId, String password, String nickname, LocalDate regDate) {
         this.id = id;
         this.memberId = memberId;
         this.password = password;
         this.nickname = nickname;
         this.regDate = regDate;
+    }
+
+    public Member() {
     }
 
     public long getId() {
@@ -47,11 +66,11 @@ public class Member {
         this.nickname = nickname;
     }
 
-    public String getRegDate() {
+    public LocalDate getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(String regDate) {
+    public void setRegDate(LocalDate regDate) {
         this.regDate = regDate;
     }
 
