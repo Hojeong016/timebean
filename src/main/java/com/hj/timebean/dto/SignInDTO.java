@@ -1,16 +1,12 @@
 package com.hj.timebean.dto;
 
-
 public class SignInDTO {
-
     private String memberId;
     private String password;
-    private String nickname;
 
-    public SignInDTO(String memberId,String password,String nickname){
+    public SignInDTO(String memberId, String password){
         this.memberId = memberId;
-        this.password =password;
-        this.nickname =nickname;
+        this.password = password;
     }
 
     public String getMemberId() {
@@ -29,20 +25,11 @@ public class SignInDTO {
         this.password = password;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
     @Override
     public String toString() {
-        return "SignInDTO{" +
+        return "LoginDTO{" +
                 "memberId='" + memberId + '\'' +
                 ", password='" + password + '\'' +
-                ", nickname='" + nickname + '\'' +
                 '}';
     }
 }

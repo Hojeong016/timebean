@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>회원가입</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .signup-form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      text-align: center;
+    }
+    .signup-form h2 {
+      margin-bottom: 20px;
+    }
+    .signup-form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+    .signup-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .signup-form button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<div class="signup-form">
+  <h2>회원가입</h2>
+  <form action="/signUp/signUp" method="post">
+    <input type="text" name="memberId" placeholder="아이디" required><br>
+    <input type="password" name="password" placeholder="패스워드" required><br>
+    <input type="text" name="nickname" placeholder="닉네임" required><br>
+    <button type="submit">가입하기</button>
+  </form>
+</div>
+</body>
+</html>
