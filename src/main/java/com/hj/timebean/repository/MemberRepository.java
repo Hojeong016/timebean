@@ -11,4 +11,6 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
     //.save() 반환 타입 엔티티
     Member save(Member member);
     Optional<Member> findById(Long id);
+    Member findByMemberId(String memberId);
+
 }
