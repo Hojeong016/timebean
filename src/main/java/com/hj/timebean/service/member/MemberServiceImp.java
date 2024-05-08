@@ -27,10 +27,8 @@ public class MemberServiceImp implements MemberService {
     //로그인 기능 (로그인 성공 시 true를 반환)
     @Override
     public Boolean login(SignInDTO signInDTO) {
-        Long id = findByMemberId(signInDTO.getMemberId());
 
-        Optional<Member> optionalMember = memberRepository.findById(id);
-        Member member =optionalMember.get();
+        Member member = memberRepository.findByMemberId(signInDTO.getMemberId());
 
         if(member != null && signInDTO.getPassword().equals(member.getPassword())){
             System.out.println("로그인 성공");
@@ -50,17 +48,7 @@ public class MemberServiceImp implements MemberService {
 
     //회원 조회 기능
     @Override
-    public Long findByMemberId(String memberId) {
-        //데이터 일치/불일치
-        Member member = memberRepository.findByMemberId(memberId);
-
-        if(member !=null){
-            System.out.println("존재하는 회원입니다.");
-            return member.getId();
-        }else {
-            System.out.println("회원 정보를 찾을 수 없습니다.");
-            return null ;
-        }
-
+    public Member findByMemberId(String memberId) {
+        return memberRepository.findByMemberId(memberId);
     }
 }

@@ -30,7 +30,7 @@ public class SignInController {
             return"redirect:/";
         } else {
             //로그인 창 반환
-            return"signIn/signIn";
+            return"redirect:/signIn/signIn";
         }
     }
 }
