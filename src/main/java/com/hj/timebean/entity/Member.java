@@ -1,5 +1,6 @@
 package com.hj.timebean.entity;
 
+import com.hj.timebean.MemberRole;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -20,14 +21,18 @@ public class Member {
     @Column(name = "nickname")
     private String nickname;
 
+    @Column(name = "role")
+    private MemberRole role;
+
     @Column(name = "reg_date")
     private LocalDate regDate;
 
-    public Member(long id, String memberId, String password, String nickname, LocalDate regDate) {
+    public Member(long id, String memberId, String password, String nickname,MemberRole role, LocalDate regDate) {
         this.id = id;
         this.memberId = memberId;
         this.password = password;
         this.nickname = nickname;
+        this.role = role;
         this.regDate = regDate;
     }
 
@@ -74,6 +79,14 @@ public class Member {
         this.regDate = regDate;
     }
 
+    public MemberRole getRole() {
+        return role;
+    }
+
+    public void setRole(MemberRole role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -81,7 +94,8 @@ public class Member {
                 ", memberId='" + memberId + '\'' +
                 ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
-                ", regDate='" + regDate + '\'' +
+                ", role=" + role +
+                ", regDate=" + regDate +
                 '}';
     }
 }
