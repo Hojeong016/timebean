@@ -2,9 +2,13 @@ package com.hj.timebean.controller;
 
 import com.hj.timebean.dto.SignInDTO;
 import com.hj.timebean.service.member.MemberService;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/signIn")
@@ -20,17 +24,18 @@ public class SignInController {
     public String signInView(){
         return "signIn/signIn";
     }
+
     @PostMapping
     public String signIn(@ModelAttribute SignInDTO signInDTO) {
 
         boolean result = memberService.login(signInDTO);
 
-        if (result = true) {
+        if (result == true) {
             //랭킹창 반환
             return"redirect:/";
         } else {
             //로그인 창 반환
-            return"redirect:/signIn/signIn";
+            return"signIn/signIn";
         }
     }
 }
