@@ -3,9 +3,12 @@ package com.hj.timebean.service.member;
 import com.hj.timebean.entity.Member;
 import com.hj.timebean.dto.SignInDTO;
 import com.hj.timebean.repository.MemberRepository;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Service
@@ -26,7 +29,7 @@ public class MemberServiceImp implements MemberService {
 
     //로그인 기능 (로그인 성공 시 true를 반환)
     @Override
-    public Boolean login(SignInDTO signInDTO) {
+    public Boolean login(SignInDTO signInDTO){
 
         Member member = memberRepository.findByMemberId(signInDTO.getMemberId());
 
