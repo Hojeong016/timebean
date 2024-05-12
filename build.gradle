@@ -13,6 +13,9 @@ java {
 
 repositories {
 	mavenCentral()
+	//ai
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
 }
 
 dependencies {
@@ -24,6 +27,10 @@ dependencies {
 	implementation 'org.hibernate:hibernate-validator:6.2.0.Final'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//ai
+	implementation platform("org.springframework.ai:spring-ai-bom:0.8.1-SNAPSHOT")
+	// Replace the following with the starter dependencies of specific modules you wish to use
+	implementation 'org.springframework.ai:spring-ai-openai'
 }
 
 tasks.named('test') {
