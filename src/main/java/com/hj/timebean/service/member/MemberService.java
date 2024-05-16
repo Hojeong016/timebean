@@ -1,5 +1,6 @@
 package com.hj.timebean.service.member;
 
+import com.hj.timebean.dto.SignUpDTO;
 import com.hj.timebean.entity.Member;
 import com.hj.timebean.dto.SignInDTO;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,7 @@ import java.util.Optional;
 public interface MemberService {
 
     //회원가입
-    Member signUp(Member member);
+    Member signUp(SignUpDTO signUpDTO);
     //로그인
     Boolean login(SignInDTO signInDTO);
     //로그아웃
