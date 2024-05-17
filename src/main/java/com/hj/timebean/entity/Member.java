@@ -22,12 +22,12 @@ public class Member {
     private String nickname;
 
     @Column(name = "role")
-    private MemberRole role;
+    private String role;
 
     @Column(name = "reg_date")
     private LocalDate regDate;
 
-    public Member(long id, String memberId, String password, String nickname,MemberRole role, LocalDate regDate) {
+    public Member(long id, String memberId, String password, String nickname,String role, LocalDate regDate) {
         this.id = id;
         this.memberId = memberId;
         this.password = password;
@@ -79,11 +79,11 @@ public class Member {
         this.regDate = regDate;
     }
 
-    public MemberRole getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(MemberRole role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

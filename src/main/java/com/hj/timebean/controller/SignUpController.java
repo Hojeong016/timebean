@@ -8,12 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@ResponseBody
 @RequestMapping("/signUp")
 public class SignUpController {
 
     private final MemberService memberService;
 
-    @Autowired
     public SignUpController(MemberService memberService){
         this.memberService = memberService;
     }
