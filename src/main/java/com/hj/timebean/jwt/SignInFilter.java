@@ -34,7 +34,7 @@ public class SignInFilter extends UsernamePasswordAuthenticationFilter {
         //사용자 정보 추출
         String memberId = obtainUsername(request);
         String password = obtainPassword(request);
-
+        System.out.println("memberId : " + memberId);
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(memberId,password);
 
         return authenticationManager.authenticate(authToken) ;
@@ -52,11 +52,8 @@ public class SignInFilter extends UsernamePasswordAuthenticationFilter {
 
         String role = auth.getAuthority();
 
-        long accessExpirationMs = Long.parseLong(getEnvironment().getProperty("expiration.access"));
-        long refreshExpirationMs = Long.parseLong(getEnvironment().getProperty("expiration.refresh"));
-
-        String accessToken = jwtUtil.accessCreateJwt(memberId, role,accessExpirationMs);
-        String refreshToken = jwtUtil.refreshCreateJwt(memberId,refreshExpirationMs );
+        String accessToken = jwtUtil.accessCreateJwt(memberId, role);
+        String refreshToken = jwtUtil.refreshCreateJwt(memberId);
 
         response.addHeader("Authorization", "Bearer " + accessToken);
         response.addHeader("Refresh-Token", refreshToken);

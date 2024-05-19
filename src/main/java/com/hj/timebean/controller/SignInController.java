@@ -27,24 +27,21 @@ public class SignInController {
         return "signIn/signIn";
     }
 
-    @PostMapping
+    @PostMapping("/signIn")
     public String signIn(@Valid @ModelAttribute SignInDTO signInDTO, RedirectAttributes redirectAttributes) {
 
         if (StringUtils.isBlank(signInDTO.getMemberId()) || StringUtils.isBlank(signInDTO.getPassword())) {
             redirectAttributes.addFlashAttribute("error", "모든 정보를 입력해주세요.");
             return "redirect:/signIn/signInView";
         }
+        boolean result = memberService.login(signInDTO);
 
-
-            boolean result = memberService.login(signInDTO);
-
-            if (result == true) {
-                //랭킹창 반환
-                return "redirect:/";
-            } else {
-                //로그인 창 반환
-                return "signIn/signIn";
-            }
+        if (result == true) {
+            //랭킹창 반환
+            return "redirect:/";
+        } else {
+            //로그인 창 반환
+            return "signIn/signIn";
         }
-
+    }
 }

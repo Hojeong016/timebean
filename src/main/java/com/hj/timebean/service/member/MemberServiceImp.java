@@ -32,12 +32,12 @@ public class MemberServiceImp implements MemberService {
 
         if (isExist){
             System.out.println("존재하는 아이디 입니다.");
-
         }
 
         Member data = new Member();
         data.setMemberId(memberId);
         data.setPassword(bCryptPasswordEncoder.encode(signUpDTO.getPassword()));
+        data.setNickname(signUpDTO.getNickname());
         data.setRole("ROLE_ADMIN");
 
         return memberRepository.save(data);
@@ -49,7 +49,7 @@ public class MemberServiceImp implements MemberService {
 
         Member member = memberRepository.findByMemberId(signInDTO.getMemberId());
 
-        if(member != null && signInDTO.getPassword().equals(member.getPassword())){
+        if(member != null && bCryptPasswordEncoder.matches(signInDTO.getPassword(), member.getPassword())){
             System.out.println("로그인 성공");
             return true;
         }else {

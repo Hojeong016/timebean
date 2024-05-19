@@ -12,6 +12,12 @@ public class JwtUtil {
     private String accessSecretKey;
     private String refreshSecretKey;
 
+    @Value("${expiration.access}")
+    private long accessExpirationMs;
+
+    @Value("${expiration.refresh}")
+    private long refreshExpirationMs;
+
     public JwtUtil(
             @Value("${spring.jwt.accessSecret}") String accessSecretKey,
             @Value("${spring.jwt.refreshSecret}") String refreshSecretKey) {
@@ -33,22 +39,22 @@ public class JwtUtil {
     }
 
     //token 생성메서드
-    public String accessCreateJwt(String memberId, String role, Long expiredMs) {
+    public String accessCreateJwt(String memberId, String role) {
 
         return Jwts.builder()
                 .claim("memberId", memberId)
                 .claim("role", role)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiredMs))
+                .setExpiration(new Date(System.currentTimeMillis() + accessExpirationMs))
                 .signWith(SignatureAlgorithm.HS256, accessSecretKey)
                 .compact();
     }
 
-    public String refreshCreateJwt(String memberId, Long expiredMs) {
+    public String refreshCreateJwt(String memberId) {
         return Jwts.builder()
                 .claim("memberId", memberId)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiredMs))
+                .setExpiration(new Date(System.currentTimeMillis() + refreshExpirationMs))
                 .signWith(SignatureAlgorithm.HS256, refreshSecretKey)
                 .compact();
 

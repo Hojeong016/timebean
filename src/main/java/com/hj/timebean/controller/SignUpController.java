@@ -26,9 +26,6 @@ public class SignUpController {
     @PostMapping("/signUp")
     public String signUp(SignUpDTO signUpDTO){
         memberService.signUp(signUpDTO);
-        return "redirect:/";
+        return "ok";
     }
-
-
-
 }

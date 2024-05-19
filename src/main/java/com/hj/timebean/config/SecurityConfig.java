@@ -1,5 +1,6 @@
 package com.hj.timebean.config;
 
+import com.hj.timebean.jwt.JwtFilter;
 import com.hj.timebean.jwt.JwtUtil;
 import com.hj.timebean.jwt.SignInFilter;
 import org.springframework.context.annotation.Bean;
@@ -51,9 +52,13 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/SignUp/SignUpView", "/", "/signIn/signInView","/css/**","/images/**").permitAll()
+                        .requestMatchers("/SignUp/SignUpView", "/", "/signIn/**", "/signUp/**", "/css/**","/images/**").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
+
+        //JWTFilter 등록
+        http
+                .addFilterBefore(new JwtFilter(jwtUtil), SignInFilter.class);
 
         //필터 추가 SignUpFilter ()는 인자를 받음 (AuthenticationManager() 메소드에 authenticationConfiguration 객체를 넣어야 함) 따라서 등록 필요
         http
