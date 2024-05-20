@@ -4,15 +4,39 @@ body {
     justify-content: center;
     height: 100vh;
     position: relative;
+    background-color: #f7f7f7; /* 연한 분홍색 */
+}
+.left-side {
+    float: left;
+    width: 20vw; /* 원하는 너비로 설정 */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .content {
+    width: 60vw;
     text-align: center;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* padding과 border를 포함한 요소의 크기 지정 */
+}
+.right-side {
+    float: right;
+    width: 20vw; /* 원하는 너비로 설정 */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sign {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
 }
 /* 로그인 및 회원가입 버튼 스타일 */
-.login-button, .signup-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+.signIn-button, .signup-button {
     background-color: #FFD8E6; /* 연한 분홍색 */
     padding: 10px 20px;
     border: none;
@@ -20,10 +44,68 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.login-button {
+.signIn-button {
     /* 로그인 버튼에 대한 스타일 */
-    margin-right: 100px; /* 회원가입 버튼과의 간격 조정 */
+    margin-right: 10px; /* 회원가입 버튼과의 간격 조정 */
 }
-.login-button:hover, .signup-button:hover {
+.signIn-button:hover, .signup-button:hover {
     background-color: #FFFFFF; /* 버튼을 누르면 하얀색으로 변함 */
+}
+
+/*테이블*/
+/* 테이블 폭 조정 */
+table {
+    width: 80%; /* content 폭과 같게 설정 */
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto; /* 가운데 정렬을 위해 추가 */
+}
+th, td {
+    padding: 8px;
+    border: 1px solid black;
+}
+
+/*todoList*/
+.todo-list {
+    position: fixed;
+    top: 100px;
+    background-color: #EAEAEA;
+    padding: 1vw;
+    margin-top: 20px;
+    width: 15vw;
+    border-radius: 10px;
+}
+/* 할 일 목록 스타일 */
+.todo-item {
+    margin-bottom: 10px;
+}
+/* 선 스타일 */
+.divider {
+    border-top: 1px solid black;
+    margin-top: 20px;
+}
+
+/*프로필 카드*/
+/* 프로필 카드 스타일 */
+.profile-card {
+    position: relative;
+    display: flex;
+    flex-direction: column; /* 세로로 배치 */
+    align-items: center;
+    width: 10vw;
+    height: 200px;
+    background-color: #f0f0f0;
+    padding: 3vw;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+.profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    background-color: #ccc; /* 프로필 사진이 없는 경우를 대비한 배경색 */
+}
+.profile-details {
+    flex: 1;
 }

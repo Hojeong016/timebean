@@ -1,14 +1,14 @@
 package com.hj.timebean.controller;
 
 import com.hj.timebean.dto.SignUpDTO;
-import com.hj.timebean.entity.Member;
 import com.hj.timebean.service.member.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@ResponseBody
 @RequestMapping("/signUp")
 public class SignUpController {
 
@@ -19,13 +19,21 @@ public class SignUpController {
     }
     //회원가입
     @GetMapping("/signUpView")
-    public String signUpView(){
+    public String signUpView(Model model){
+        model.addAttribute("signUpDTO", new SignUpDTO());
+
         return "signUp/signUp";
     }
 
     @PostMapping("/signUp")
-    public String signUp(SignUpDTO signUpDTO){
+    public String signUp(@Valid @ModelAttribute("signUpDTO") SignUpDTO signUpDTO, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+            System.out.println("에러!!!!!!!!1");
+            return "signUp/signUp";
+        }
+
         memberService.signUp(signUpDTO);
-        return "ok";
+
+        return "redirect:/";
     }
 }

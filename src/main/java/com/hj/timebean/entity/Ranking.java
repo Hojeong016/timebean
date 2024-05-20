@@ -11,8 +11,9 @@ public class Ranking implements Comparable<Ranking>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "member_id")
-    private Long memberId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Column(name = "nickname")
     private String nickname;
@@ -22,6 +23,11 @@ public class Ranking implements Comparable<Ranking>{
 
     @Column(name = "reg_date")
     private LocalDate regDate;
+
+    @PrePersist //엔티티가 영속화되기 전에 호출
+    public void prePersist() {
+        regDate = LocalDate.now();
+    }
 
     public Ranking() {
     }
@@ -40,12 +46,12 @@ public class Ranking implements Comparable<Ranking>{
         this.id = id;
     }
 
-    public Long getMemberId() {
-        return memberId;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public String getNickname() {

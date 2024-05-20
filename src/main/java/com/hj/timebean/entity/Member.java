@@ -21,17 +21,26 @@ public class Member {
     @Column(name = "nickname")
     private String nickname;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "role")
     private String role;
 
     @Column(name = "reg_date")
     private LocalDate regDate;
 
-    public Member(long id, String memberId, String password, String nickname,String role, LocalDate regDate) {
+    @PrePersist //엔티티가 영속화되기 전에 호출
+    public void prePersist() {
+        regDate = LocalDate.now();
+    }
+
+    public Member(long id, String memberId, String password, String nickname, String email, String role, LocalDate regDate) {
         this.id = id;
         this.memberId = memberId;
         this.password = password;
         this.nickname = nickname;
+        this.email = email;
         this.role = role;
         this.regDate = regDate;
     }
@@ -71,12 +80,12 @@ public class Member {
         this.nickname = nickname;
     }
 
-    public LocalDate getRegDate() {
-        return regDate;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRegDate(LocalDate regDate) {
-        this.regDate = regDate;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getRole() {
@@ -85,6 +94,14 @@ public class Member {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public LocalDate getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(LocalDate regDate) {
+        this.regDate = regDate;
     }
 
     @Override

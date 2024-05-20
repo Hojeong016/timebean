@@ -3,11 +3,7 @@ package com.hj.timebean.service.member;
 import com.hj.timebean.dto.SignUpDTO;
 import com.hj.timebean.entity.Member;
 import com.hj.timebean.dto.SignInDTO;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.validation.Valid;
-import java.util.Optional;
 
 public interface MemberService {
 

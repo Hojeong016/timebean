@@ -1,15 +1,13 @@
 package com.hj.timebean.dto;
 
-
-import com.hj.timebean.entity.Member;
-
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 public class SignInDTO{
 
-    @NotBlank(message = "로그인 ID가 작성되지 않았습니다.")
+
+    @NotBlank(message = "아이디를 입력해주세요.")
     private String memberId;
-    @NotBlank(message = "로그인 password가 작성되지 않았습니다.")
+    @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
 
     public SignInDTO() {

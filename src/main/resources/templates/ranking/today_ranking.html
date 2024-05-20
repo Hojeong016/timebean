@@ -2,32 +2,197 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Today's Top3 Ranking</title>
+    <title>timebean rank</title>
     <link rel="stylesheet" href="/css/today_ranking.css">
 </head>
 <body>
-<div class="content">
-    <h1>Today's Top3 Ranking</h1>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Total Time</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- 랭킹 목록을 순회하며 출력 -->
-        <tr th:each="rank, status : ${todayRankingList}">
-            <td th:text="${status.index + 1}"></td>
-            <td th:text="${rank.member.nickname}"></td>
-            <td th:text="${rank.totalTime}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <!-- 로그인 및 회원가입 버튼 -->
-    <button class="login-button" onclick="window.location.href='/signIn/signInView'">로그인</button>
-    <button class="signup-button" onclick="window.location.href='/signUp/signUpView'">회원가입</button>
-</div>
+    <div class="left-side">
+        <!-- 프로필 카드 -->
+        <div class="profile-card">
+            <!-- 프로필 사진 -->
+            <div class="profile-image"></div>
+            <!-- 프로필 상세 정보 -->
+            <div class="profile-details">
+                <div><strong>이름:</strong> John Doe</div>
+                <div><strong>시간:</strong> 3시간 15분</div>
+                <div><strong>랭크:</strong> 1위</div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <h1 style="margin-top: 30px;">Today's Top3 Ranking</h1>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Total Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 랭킹 목록을 순회하며 출력 -->
+            <tr th:each="rank, status : ${todayRankingList}">
+                <td th:text="${status.index + 1}"></td>
+                <td th:text="${rank.member.nickname}"></td>
+                <td th:text="${rank.totalTime}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="right-side">
+        <div class="sign">
+            <!-- 로그인 및 회원가입 버튼 -->
+            <button class="signIn-button" onclick="window.location.href='/signIn/signInView'">로그인</button>
+            <button class="signup-button" onclick="window.location.href='/signUp/signUpView'">회원가입</button>
+        </div>
+        <!-- 노란색 div에 todoList 추가 -->
+        <div class="todo-list">
+            <h2>Todo List</h2>
+            <!-- 할 일을 입력하는 텍스트 박스 -->
+            <input type="text" id="todoInput" placeholder="할 일을 입력하세요">
+            <!-- 작성 버튼 -->
+            <button onclick="addTodo()">작성</button>
+            <!-- 선 -->
+            <div class="divider"></div>
+            <!-- 할 일 목록 -->
+            <div id="todoList">
+                <!-- 여기에 동적으로 할 일 목록이 추가될 예정 -->
+            </div>
+        </div>
+        <script>
+            // 페이지가 로드될 때 DB에서 보여줄 할 일 목록을 불러와 표시하는 함수
+            window.onload = function() {
+                fetchTodoList();
+            };
+
+            // 보여줄 할 일 목록을 불러와 표시하는 함수
+            function fetchTodoList() {
+                fetch('/todos')
+                    .then(response => response.json())
+                    .then(data => {
+                        var todoListDiv = document.getElementById("todoList");
+                        todoListDiv.innerHTML = ""; // 기존 목록 초기화
+                        data.forEach(todo => {
+                            if (todo.status) { // status가 true인 경우에만 보여줌
+                                var todoItem = document.createElement("div");
+                                todoItem.className = "todo-item";
+                                todoItem.innerHTML = '<input type="checkbox" id="' + todo.id + '" onchange="updateTodoStatus(' + todo.id + ', this.checked)"> ' + todo.text +
+                                    '  <button onclick="deleteTodo(' + todo.id + ')">x</button>'; // x 삭제 버튼 추가
+                                todoListDiv.appendChild(todoItem);
+                                // 체크박스 상태 업데이트
+                                document.getElementById(todo.id).checked = todo.completed;
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching todo list:', error);
+                    });
+            }
+
+            // 할 일 추가 함수
+            function addTodo() {
+                var todoInput = document.getElementById("todoInput");
+                var todoText = todoInput.value.trim();
+                if (todoText !== "") {
+                    fetch('/todos', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            text: todoText,
+                            completed: false,
+                            status: true // 목록에 보이도록 설정
+                        })
+                    })
+                        .then(response => {
+                            // 할 일 목록 다시 불러오기
+                            fetchTodoList();
+                        })
+                        .catch(error => {
+                            console.error('Error adding todo:', error);
+                        });
+                    todoInput.value = ""; // 입력 창 비우기
+                }
+            }
+
+            // 할 일 상태 업데이트 함수
+            function updateTodoStatus(todoId, isChecked) {
+                fetch('/todos/' + todoId, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ completed: isChecked })
+                })
+                    .then(response => {
+                        // 할 일 목록 다시 불러오기
+                        fetchTodoList();
+                    })
+                    .catch(error => {
+                        console.error('Error updating todo status:', error);
+                    });
+            }
+
+            // 할 일 삭제 함수
+            function deleteTodo(todoId) {
+                fetch('/todos/' + todoId, {
+                    method: 'DELETE'
+                })
+                    .then(response => {
+                        // 할 일 목록 다시 불러오기
+                        fetchTodoList();
+                    })
+                    .catch(error => {
+                        console.error('Error deleting todo:', error);
+                    });
+            }
+
+            // 할 일 삭제 함수
+            // function deleteTodo(todoId) {
+            //     fetch('/todos/' + todoId, {
+            //         method: 'DELETE'
+            //     })
+            //         .then(response => {
+            //             // 할 일 목록 다시 불러오기
+            //             fetchTodoList();
+            //         })
+            //         .catch(error => {
+            //             console.error('Error deleting todo:', error);
+            //         });
+            // }
+
+            // 할 일 목록 추가 함수
+            function addTodo2() {
+                var todoInput = document.getElementById("todoInput");
+                var todoText = todoInput.value;
+                if (todoText.trim() !== "") {
+                    var todoList = document.getElementById("todoList");
+                    var todoItem = document.createElement("div");
+                    todoItem.className = "todo-item";
+                    todoItem.innerHTML = '<input id="todoCheckbox" type="checkbox"> ' + todoText;
+                    todoList.appendChild(todoItem);
+                    todoInput.value = ""; // 입력 창 비우기
+                }
+            }
+
+            // document.getElementById("myCheckbox").addEventListener("change", function() {
+            //     var isChecked = this.checked;
+            //     if(isChecked) {
+            //         fetch('/sendDataToController', {
+            //             method: 'POST',
+            //             headers: {
+            //                 'Content-Type': 'application/json'
+            //             },
+            //             body: JSON.stringify({ isChecked: isChecked })
+            //         }).then(response => {
+            //             // 처리할 것이 있다면 여기서 처리
+            //         }).catch(error => {
+            //             console.error('Error:', error);
+            //         });
+            //     }
+            // });
+        </script>
+    </div>
 </body>
 </html>

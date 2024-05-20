@@ -38,7 +38,8 @@ public class MemberServiceImp implements MemberService {
         data.setMemberId(memberId);
         data.setPassword(bCryptPasswordEncoder.encode(signUpDTO.getPassword()));
         data.setNickname(signUpDTO.getNickname());
-        data.setRole("ROLE_ADMIN");
+        data.setEmail(signUpDTO.getEmail());
+        data.setRole("ROLE_USER");
 
         return memberRepository.save(data);
     }

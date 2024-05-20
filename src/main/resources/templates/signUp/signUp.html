@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>회원가입</title>
@@ -8,10 +8,22 @@
 <body>
 <div class="signup-form">
   <h2>회원가입</h2>
-  <form action="/signUp/signUp" method="post">
-    <input type="text" name="memberId" placeholder="아이디" required><br>
+  <form action="#" th th:action="@{/signUp/signUp}" th:object="${signUpDTO}" method="post">
+    <input type="text" th:field="*{memberId}" placeholder="아이디"><br>
+    <div th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></div>
+
     <input type="password" name="password" placeholder="패스워드" required><br>
-    <input type="text" name="nickname" placeholder="닉네임" required><br>
+    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+
+    <input type="password" th:field="*{passwordConfirm}" placeholder="패스워드 확인"><br>
+    <div th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></div>
+
+    <input type="text" th:field="*{nickname}" placeholder="닉네임" required><br>
+    <div th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"></div>
+
+    <input type="email" th:field="*{email}" placeholder="이메일 ex)xxx@xxx.com" required><br>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
     <button type="submit">가입하기</button>
   </form>
 </div>
