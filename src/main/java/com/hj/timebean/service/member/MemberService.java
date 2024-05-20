@@ -14,5 +14,5 @@ public interface MemberService {
     //로그아웃
     void logout();
     //회원정보조회
-    UserDetails findByMemberId(String memberId);
+    Member findByMemberId(String memberId);
 }

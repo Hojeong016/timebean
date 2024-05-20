@@ -27,6 +27,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-configuration-processor'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+	// SLF4J API
+	implementation 'org.slf4j:slf4j-api:1.7.32'
+
+	// Logback 백엔드 구현
+	implementation 'ch.qos.logback:logback-classic:1.2.6'
 
 	//ai
 	implementation platform("org.springframework.ai:spring-ai-bom:0.8.1-SNAPSHOT")

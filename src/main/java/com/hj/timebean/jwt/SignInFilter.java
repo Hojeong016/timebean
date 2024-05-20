@@ -34,7 +34,6 @@ public class SignInFilter extends UsernamePasswordAuthenticationFilter {
         //사용자 정보 추출
         String memberId = obtainUsername(request);
         String password = obtainPassword(request);
-        System.out.println("memberId : " + memberId);
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(memberId,password);
 
         return authenticationManager.authenticate(authToken) ;

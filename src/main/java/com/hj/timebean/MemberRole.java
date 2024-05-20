@@ -1,7 +1,7 @@
 package com.hj.timebean;
 
 public enum MemberRole {
-    USER, ADMIN;
+    ROLE_USER, ROLE_ADMIN
 }
 
 // USER - 사용자 ADMIN - 관리자

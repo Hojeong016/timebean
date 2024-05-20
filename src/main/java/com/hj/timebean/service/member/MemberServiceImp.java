@@ -68,14 +68,8 @@ public class MemberServiceImp implements MemberService {
 
     //회원 조회 기능
     @Override
-    public UserDetails findByMemberId(String memberId) throws UsernameNotFoundException {
+    public Member findByMemberId(String memberId) throws UsernameNotFoundException {
 
-       Member memberData = memberRepository.findByMemberId(memberId);
-
-       if(memberData != null){
-
-           return new CustomMemberDetails(memberData);
-       }
-        return null;
+        return memberRepository.findByMemberId(memberId);
     }
 }
