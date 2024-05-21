@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,19 +25,15 @@ import java.util.stream.Collectors;
 @Component
 public class JwtUtil {
 
-    private static final String AUTHORITIES_KEY ="roles";
+    private static final String AUTHORITIES_KEY ="auth";
     private static final String BEARER_TYPE = "Bearer";
-    private final long accessExpirationMs;
-    private final long refreshExpirationMs;
+    private static final long accessExpirationMs = 1000 * 60 * 30; ;
+
+    private static final long refreshExpirationMs = 1000 * 60 * 60 * 24 * 7;
 
     private final Key key;
-    public JwtUtil (@Value("${jwt.secret}") String secretKey,
-                    @Value("${expiration.refresh}")long accessExpirationMs,
-                    @Value("${expiration.access}") long refreshExpirationMs) {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        this.key = Keys.hmacShaKeyFor(keyBytes);
-        this.accessExpirationMs=accessExpirationMs;
-        this.refreshExpirationMs=refreshExpirationMs;
+    public JwtUtil (@Value("${spring.jwt.SecretKey}") String secretKey){
+        this.key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
     public TokenDTO generateToken(Authentication authentication) {
         // 권한 가져오기 ("ROLE_USER","ROLE_ADMIN")
@@ -61,12 +58,21 @@ public class JwtUtil {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
-        return  TokenDTO.builder()
+        return TokenDTO.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(accessToken)
                 .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
                 .refreshToken(refreshToken)
                 .build();
+    }
+
+    // Refresh Token 생성
+    public String generateRefreshToken() {
+        long now = (new Date()).getTime();
+        return Jwts.builder()
+                .setExpiration(new Date(now + refreshExpirationMs))
+                .signWith(key, SignatureAlgorithm.HS512)
+                .compact();
     }
     public Authentication getAuthentication(String accessToken) {
         // 토큰 복호화

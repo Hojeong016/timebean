@@ -30,12 +30,6 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-	// SLF4J API
-	implementation 'org.slf4j:slf4j-api:1.7.32'
-
-	// Logback 백엔드 구현
-	implementation 'ch.qos.logback:logback-classic:1.2.6'
-
 	//ai
 	implementation platform("org.springframework.ai:spring-ai-bom:0.8.1-SNAPSHOT")
 	// Replace the following with the starter dependencies of specific modules you wish to use
@@ -43,6 +37,7 @@ dependencies {
 	//토큰(Spring Security)
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
+
 	// JWT
 	implementation 'com.auth0:java-jwt:4.0.0'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'

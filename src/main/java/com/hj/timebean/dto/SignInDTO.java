@@ -13,6 +13,10 @@ public class SignInDTO{
     public SignInDTO() {
     }
 
+    public SignInDTO(String memberId, String password) {
+        this.memberId = memberId;
+        this.password = password;
+    }
 
     public String getMemberId() {
         return memberId;
