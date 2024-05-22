@@ -9,16 +9,15 @@
 <body>
 <div class="login-container">
     <h2>Login</h2>
-
-    <form action="/signIn" method="post">
-        <input type="text" class="input-field" placeholder="Username" name="memberId">
-        <input type="password" class="input-field" placeholder="Password" name="password">
+    <form action="/signIn/signIn" method="post">
+        <input type="text" class="input-field" placeholder="아이디" name="memberId">
+        <input type="password" class="input-field" placeholder="비밀번호" name="password">
         <br>
             <span th:if="${error}" th:text="${error}" style="color: red; font-size: x-small"></span>
         </br>
-        <button type="submit" class="button" >Sign in</button>
+        <button type="submit" class="signIn-button" >Sign In</button>
     </form>
-    <p>Don't have an account? <a href="/signUp/signUpView" class="button">Sign up</a></p>
+    <p>Don't have an account? <a href="/signUp/signUpView" class="signUp-button">Sign Up</a></p>
 </div>
 
 

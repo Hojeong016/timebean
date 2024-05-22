@@ -12,7 +12,11 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
     Member save(Member member);
     //Optional<Member> findById(Long id);
     Member findByMemberId(String memberId);
-
+    // 아이디 중복검사
     boolean existsByMemberId(String memberID);
+    // 닉네임 중복검사
+    boolean existsByNickname(String nickname);
+    // email 중복검사
+    boolean existsByEmail(String email);
 
 }

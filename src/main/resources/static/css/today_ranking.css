@@ -37,7 +37,8 @@ body {
 }
 /* 로그인 및 회원가입 버튼 스타일 */
 .signIn-button, .signup-button {
-    background-color: #FFD8E6; /* 연한 분홍색 */
+    background-color: #A1CEBD;
+    color: #ffffff;
     padding: 10px 20px;
     border: none;
     border-radius: 20px; /* 모서리를 둥글게 */
@@ -49,7 +50,8 @@ body {
     margin-right: 10px; /* 회원가입 버튼과의 간격 조정 */
 }
 .signIn-button:hover, .signup-button:hover {
-    background-color: #FFFFFF; /* 버튼을 누르면 하얀색으로 변함 */
+    background-color: #7EBCAB; /* 버튼을 누르면 색 변함 */
+    color: #ffffff;
 }
 
 /*테이블*/

@@ -26,8 +26,8 @@ body {
     box-sizing: border-box;
 }
 
-.button {
-    background-color: rgb(255, 182, 193);
+.signIn-button {
+    background-color: #A1CEBD;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
@@ -36,7 +36,11 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.button:hover {
-    background-color: #ffffff;
-    color: #ff69b4;
+.signUp-button {
+    color: #A1CEBD;
+}
+
+.signIn-button:hover {
+    background-color: #7EBCAB;
+    color: #ffffff;
 }

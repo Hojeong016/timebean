@@ -10,19 +10,23 @@
   <h2>회원가입</h2>
   <form action="#" th th:action="@{/signUp/signUp}" th:object="${signUpDTO}" method="post">
     <input type="text" th:field="*{memberId}" placeholder="아이디"><br>
-    <div th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></div>
+    <div th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></div><br>
 
     <input type="password" name="password" placeholder="패스워드" required><br>
-    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div><br>
 
     <input type="password" th:field="*{passwordConfirm}" placeholder="패스워드 확인"><br>
-    <div th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></div>
+    <div th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></div><br>
 
     <input type="text" th:field="*{nickname}" placeholder="닉네임" required><br>
-    <div th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"></div>
+    <div th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"></div><br>
 
     <input type="email" th:field="*{email}" placeholder="이메일 ex)xxx@xxx.com" required><br>
-    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div><br>
+
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+      <span th:text="${errorMessage}"></span>
+    </div><br>
 
     <button type="submit">가입하기</button>
   </form>

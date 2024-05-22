@@ -27,13 +27,21 @@ public class SignUpController {
 
     @PostMapping("/signUp")
     public String signUp(@Valid @ModelAttribute("signUpDTO") SignUpDTO signUpDTO, BindingResult bindingResult, Model model){
-        if (bindingResult.hasErrors()) {
-            System.out.println("에러!!!!!!!!1");
-            return "signUp/signUp";
+        try {
+            // 아이디, 닉네임, 이메일 중복 검사
+            memberService.existsByMemberId(signUpDTO);
+            memberService.existsByNickname(signUpDTO);
+            memberService.existsByEmail(signUpDTO);
+
+            if (bindingResult.hasErrors()) {
+                return "signUp/signUp";
+            }
+            memberService.signUp(signUpDTO);
+
+            return "redirect:/";
+        } catch (IllegalStateException ex) {
+            model.addAttribute("errorMessage", ex.getMessage());
+            return "signUp/signUp"; // 예외가 발생했을 때 다시 회원가입 페이지로 이동
         }
-
-        memberService.signUp(signUpDTO);
-
-        return "redirect:/";
     }
 }
