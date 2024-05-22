@@ -1,12 +1,9 @@
 package com.hj.timebean.service.member;
 
-import com.hj.timebean.MemberRole;
-import com.hj.timebean.dto.CustomMemberDetails;
 import com.hj.timebean.dto.SignUpDTO;
 import com.hj.timebean.entity.Member;
 import com.hj.timebean.dto.SignInDTO;
 import com.hj.timebean.repository.MemberRepository;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -68,15 +65,9 @@ public class MemberServiceImp implements MemberService {
 
     // 회원 조회 기능
     @Override
-    public UserDetails findByMemberId(String memberId) throws UsernameNotFoundException {
+    public Member findByMemberId(String memberId) throws UsernameNotFoundException {
 
-       Member memberData = memberRepository.findByMemberId(memberId);
-
-       if(memberData != null){
-
-           return new CustomMemberDetails(memberData);
-       }
-        return null;
+        return memberRepository.findByMemberId(memberId);
     }
 
     // 아이디 중복 검사
