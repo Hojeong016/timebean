@@ -27,17 +27,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-configuration-processor'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	compileOnly 'org.projectlombok:lombok:1.18.20'
-	annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-	//ai
-	implementation platform("org.springframework.ai:spring-ai-bom:0.8.1-SNAPSHOT")
-	// Replace the following with the starter dependencies of specific modules you wish to use
-	implementation 'org.springframework.ai:spring-ai-openai'
-	//토큰(Spring Security)
+	//Spring Security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+	//ai
+	//implementation platform("org.springframework.ai:spring-ai-bom:0.8.1-SNAPSHOT")
+	// Replace the following with the starter dependencies of specific modules you wish to use
+	//implementation 'org.springframework.ai:spring-ai-openai'
 }
 
 tasks.named('test') {
