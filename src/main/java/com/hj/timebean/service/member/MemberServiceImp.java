@@ -1,5 +1,6 @@
 package com.hj.timebean.service.member;
 
+import com.hj.timebean.OAuth.Role;
 import com.hj.timebean.dto.SignUpDTO;
 import com.hj.timebean.entity.Member;
 import com.hj.timebean.dto.SignInDTO;
@@ -36,7 +37,7 @@ public class MemberServiceImp implements MemberService {
         data.setPassword(bCryptPasswordEncoder.encode(signUpDTO.getPassword()));
         data.setNickname(signUpDTO.getNickname());
         data.setEmail(signUpDTO.getEmail());
-        data.setRole("ROLE_USER");
+        data.setRole(Role.ROLE_USER);
 
         return memberRepository.save(data);
     }

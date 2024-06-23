@@ -13,13 +13,29 @@
         <input type="text" class="input-field" placeholder="아이디" name="memberId">
         <input type="password" class="input-field" placeholder="비밀번호" name="password">
         <br>
-            <span th:if="${error}" th:text="${error}" style="color: red; font-size: x-small"></span>
+        <span th:if="${error}" th:text="${error}" style="color: red; font-size: x-small"></span>
         </br>
-        <button type="submit" class="signIn-button" >Sign In</button>
+        <button type="submit" class="signIn-button">Sign In</button>
     </form>
     <p>Don't have an account? <a href="/signUp/signUpView" class="signUp-button">Sign Up</a></p>
+
+    <!-- Google 로그인 버튼 추가 -->
+    <div class="google-login-container">
+        <button class="google-signIn-button" onclick="window.location.href='/oauth2/authorization/google'" id="googleLoginBtn">Sign in with Google</button>
+    </div>
+
+    <div class="naver-login-container">
+        <button class="google-signIn-button" id="NaverLoginBtn">Sign in with Naver</button>
+    </div>
 </div>
 
-
+<div class="oauth2-login-container">
+    <ul>
+        <li th:if="${session.member != null}">
+            [[${session.member.email}]],[[${session.member.name}]] <a th:href="@{/logout}"> logout</a>
+        </li>
+    </ul>
+</div>
+</div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.hj.timebean.entity;
 
-import com.hj.timebean.MemberRole;
+import com.hj.timebean.OAuth.Role;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -14,19 +14,15 @@ public class Member {
 
     @Column(name = "member_id")
     private String memberId;
-
     @Column(name = "password")
     private String password;
-
     @Column(name = "nickname")
     private String nickname;
-
     @Column(name = "email")
     private String email;
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private String role;
-
+    private Role role;
     @Column(name = "reg_date")
     private LocalDate regDate;
 
@@ -35,7 +31,7 @@ public class Member {
         regDate = LocalDate.now();
     }
 
-    public Member(long id, String memberId, String password, String nickname, String email, String role, LocalDate regDate) {
+    public Member(long id, String memberId, String password, String nickname, String email, Role role, LocalDate regDate) {
         this.id = id;
         this.memberId = memberId;
         this.password = password;
@@ -88,11 +84,11 @@ public class Member {
         this.email = email;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
