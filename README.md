@@ -35,10 +35,9 @@ time_bean 프로젝트는 주로 컴퓨터 작업을 하는 사람들이 순 작
 <details>
 <summary>요구사항 정의서</summary>
 
-
-
 </div>
 </details>
+
 ---
 ### 3.  주요 기능 코드리뷰
 ---
