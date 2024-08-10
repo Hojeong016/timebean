@@ -20,12 +20,25 @@ time_bean 프로젝트는 주로 컴퓨터 작업을 하는 사람들이 순 작
 동시에 다른 사용자들과 작업 시간을 공유하며 학습 동기를 부여할 수 있는 커뮤니티를 제공하여 작업 동기 부여와 효율성을 높이는 것을 목표로하는 프로젝트입니다.
 
 
-#### <기술 스택>
- !Java
+#### <개발 환경>
+
+<img src="https://github.com/user-attachments/assets/cfdf7ab3-8b3d-422d-9713-57870b80f73d" width="380" height="80"/>
+
+#### <멤버 구성>
++ [강희진](https://github.com/HuijinKang, "git_hub link") : 타이머 프로그램 개발, 랭크 서비스 개발
++ 채호정 : 회원 서비스, 서류 작업
  
 
 ---
 ### 2.  요구사항 정의서 / 흐름도 / 테이블
+
+<details>
+<summary>요구사항 정의서</summary>
+
+
+
+</div>
+</details>
 ---
 ### 3.  주요 기능 코드리뷰
 ---
