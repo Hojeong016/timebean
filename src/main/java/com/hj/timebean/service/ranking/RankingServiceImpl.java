@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,11 +21,11 @@ public class RankingServiceImpl implements RankingService{
     }
 
     @Override
-    public List<Ranking> findByRegDate() {
+    public List<Ranking> findByRecordedDate() {
         // 오늘 날짜 구하기
         LocalDate today = LocalDate.now();
 
-        return rankingRepository.findByRegDate(today);
+        return rankingRepository.findByRecordedDate(today);
     }
 
     @Override

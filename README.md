@@ -1,4 +1,4 @@
-# 🌱time_bean 
+# 🌱timebean 
 
 + [Project 소개](#1.--Project-소개)
 

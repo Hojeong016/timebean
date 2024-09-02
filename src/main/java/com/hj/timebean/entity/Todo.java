@@ -24,24 +24,24 @@ public class Todo {
     @Column(name = "status")
     private boolean status;
 
-    @Column(name = "reg_date")
-    private LocalDate regDate;
+    @Column(name = "recorded_date")
+    private LocalDate recordedDate;
 
     @PrePersist //엔티티가 영속화되기 전에 호출
     public void prePersist() {
-        regDate = LocalDate.now();
+        recordedDate = LocalDate.now();
     }
 
     public Todo() {
     }
 
-    public Todo(Long id, Member member, String text, boolean completed, boolean status, LocalDate regDate) {
+    public Todo(Long id, Member member, String text, boolean completed, boolean status, LocalDate recordedDate) {
         this.id = id;
         this.member = member;
         this.text = text;
         this.completed = completed;
         this.status = status;
-        this.regDate = regDate;
+        this.recordedDate = recordedDate;
     }
 
     public Long getId() {
@@ -84,11 +84,11 @@ public class Todo {
         this.status = status;
     }
 
-    public LocalDate getRegDate() {
-        return regDate;
+    public LocalDate getRecordedDate() {
+        return recordedDate;
     }
 
-    public void setRegDate(LocalDate regDate) {
-        this.regDate = regDate;
+    public void setRecordedDate(LocalDate recordedDate) {
+        this.recordedDate = recordedDate;
     }
 }

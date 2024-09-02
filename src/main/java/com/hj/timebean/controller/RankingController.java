@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -24,7 +22,7 @@ public class RankingController {
     public String showTodayRanking(Model model) {
 
         // 오늘 날짜에 해당하는 랭킹 목록 조회
-        List<Ranking> todayRankingList = rankingService.findByRegDate();
+        List<Ranking> todayRankingList = rankingService.findByRecordedDate();
 
         //total time 기준으로 내림차순 정렬
         //Collections.sort(todayRankingList);

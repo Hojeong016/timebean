@@ -15,27 +15,23 @@ public class Ranking implements Comparable<Ranking>{
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(name = "nickname")
-    private String nickname;
-
     @Column(name = "total_time")
     private int totalTime;
 
-    @Column(name = "reg_date")
-    private LocalDate regDate;
+    @Column(name = "recorded_date")
+    private LocalDate recordedDate;
 
     @PrePersist //엔티티가 영속화되기 전에 호출
     public void prePersist() {
-        regDate = LocalDate.now();
+        recordedDate = LocalDate.now();
     }
 
     public Ranking() {
     }
 
-    public Ranking(String nickname, int totalTime, LocalDate regDate) {
-        this.nickname = nickname;
+    public Ranking(int totalTime, LocalDate recordedDate) {
         this.totalTime = totalTime;
-        this.regDate = regDate;
+        this.recordedDate = recordedDate;
     }
 
     public Long getId() {
@@ -54,14 +50,6 @@ public class Ranking implements Comparable<Ranking>{
         this.member = member;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String name) {
-        this.nickname = name;
-    }
-
     public int getTotalTime() {
         return totalTime;
     }
@@ -70,12 +58,12 @@ public class Ranking implements Comparable<Ranking>{
         this.totalTime = time;
     }
 
-    public LocalDate getRegDate() {
-        return regDate;
+    public LocalDate getRecordedDate() {
+        return recordedDate;
     }
 
-    public void setRegDate(LocalDate regDate) {
-        this.regDate = regDate;
+    public void setRecordedDate(LocalDate recordedDate) {
+        this.recordedDate = recordedDate;
     }
 
     @Override

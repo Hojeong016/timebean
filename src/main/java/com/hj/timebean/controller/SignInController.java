@@ -1,6 +1,7 @@
 package com.hj.timebean.controller;
 
 import com.hj.timebean.auth.PrincipalDetails;
+import com.hj.timebean.entity.Ranking;
 import com.hj.timebean.repository.MemberRepository;
 import com.hj.timebean.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class SignInController {
         @GetMapping("/user")
         public  @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
             System.out.println(principalDetails.getMember());
+            System.out.println();
             return "user";
         }
 
