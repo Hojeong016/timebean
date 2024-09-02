@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -33,9 +35,14 @@ public class Member {
     @Column(name = "level")
     private String level; //"씨앗"
 
-    //읿반 호그인 속성
+    @Column(name = "created_date")
+    private LocalDate createdDate;
+    @Column(name = "updated_date")
+    private LocalDate updatedDate;
+
+    //읿반 로그인 속성
     private String password;
-    private Timestamp last_login;
+    private LocalDate last_login;
 
     // @Pattern(regexp = "@") // 정규표현식
 
@@ -45,5 +52,9 @@ public class Member {
     @Column(name = "provider_id")
     private String providerId;
 
+    @PrePersist //엔티티가 영속화되기 전에 호출
+    public void prePersist() {
+        createdDate = LocalDate.now();
+    }
 
 }
