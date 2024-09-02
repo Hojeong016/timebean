@@ -35,7 +35,7 @@ public class Member {
 
     //읿반 호그인 속성
     private String password;
-    private Timestamp lastLogin;
+    private Timestamp last_login;
 
     // @Pattern(regexp = "@") // 정규표현식
 
