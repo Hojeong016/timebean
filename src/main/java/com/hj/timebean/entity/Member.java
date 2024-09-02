@@ -19,14 +19,6 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    //일반 로그인 유저 pk
-    @Column(name = "login_id")
-    private int loginId;
-
-    @Column(name = "oauth_id")
-    //oauth 로그인 유저 pk
-    private int oauthId;
-
     //공동 정보
     @Column(name = "account_id")
     private String accountId;
