@@ -1,114 +1,57 @@
 package com.hj.timebean.entity;
 
-import com.hj.timebean.OAuth.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 @Entity
+@Data
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 @Table(name = "member")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "member_id")
-    private String memberId;
-    @Column(name = "password")
-    private String password;
-    @Column(name = "nickname")
-    private String nickname;
+    //일반 로그인 유저 pk
+    @Column(name = "login_id")
+    private int loginId;
+
+    @Column(name = "oauth_id")
+    //oauth 로그인 유저 pk
+    private int oauthId;
+
+    //공동 정보
+    @Column(name = "account_id")
+    private String accountId;
     @Column(name = "email")
     private String email;
-    @Enumerated(EnumType.STRING)
+    @Column(name = "nickname")
+    private String nickname;
+    @Column(name = "timer_password")
+    private int timerPassword;
     @Column(name = "role")
-    private Role role;
-    @Column(name = "reg_date")
-    private LocalDate regDate;
+    private String role; //ROLE_USER, ROLE_ADMIN
+    @Column(name = "level")
+    private String level; //"씨앗"
 
-    @PrePersist //엔티티가 영속화되기 전에 호출
-    public void prePersist() {
-        regDate = LocalDate.now();
-    }
+    //읿반 호그인 속성
+    private String password;
+    private Timestamp lastLogin;
 
-    public Member(long id, String memberId, String password, String nickname, String email, Role role, LocalDate regDate) {
-        this.id = id;
-        this.memberId = memberId;
-        this.password = password;
-        this.nickname = nickname;
-        this.email = email;
-        this.role = role;
-        this.regDate = regDate;
-    }
+    // @Pattern(regexp = "@") // 정규표현식
 
-    public Member() {
-    }
+    //oauth 로그인 속성
+    @Column(name = "provider")
+    private String provider;
+    @Column(name = "provider_id")
+    private String providerId;
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public LocalDate getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(LocalDate regDate) {
-        this.regDate = regDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", memberId='" + memberId + '\'' +
-                ", password='" + password + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", role=" + role +
-                ", regDate=" + regDate +
-                '}';
-    }
 }

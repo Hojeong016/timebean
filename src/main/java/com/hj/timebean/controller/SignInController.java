@@ -1,82 +1,53 @@
 package com.hj.timebean.controller;
 
-import com.hj.timebean.dto.SignInDTO;
+import com.hj.timebean.auth.PrincipalDetails;
+import com.hj.timebean.repository.MemberRepository;
 import com.hj.timebean.service.member.MemberService;
-import io.micrometer.common.util.StringUtils;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ResolvableType;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/signIn")
 public class SignInController {
 
-    private final MemberService memberService;
-    private final ClientRegistrationRepository clientRegistrationRepository;
+        @Autowired
+        private MemberService memberService;
 
-    @Value("${spring.security.oauth2.client.provider.google.authorizationUri}")
-    private static final String authorizationRequestBaseUri = "oauth2/authorization";
-    private Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
+        @Autowired
+        private MemberRepository memberRepository;
 
-    @Autowired
-    public SignInController(MemberService memberService, ClientRegistrationRepository clientRegistrationRepository) {
-        this.memberService = memberService;
-        this.clientRegistrationRepository = clientRegistrationRepository;
-    }
-    @GetMapping("/signInView")
-    public String signInView(){
-        return "signIn/signIn";
-    }
-    @GetMapping("/User")
-    public  String user(){
-        return "User";
-    }
+        @Autowired
+        private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @PostMapping("/signIn")
-    public String signIn(@Valid @ModelAttribute SignInDTO signInDTO, RedirectAttributes redirectAttributes) {
 
-        if (StringUtils.isBlank(signInDTO.getMemberId()) || StringUtils.isBlank(signInDTO.getPassword())) {
-            redirectAttributes.addFlashAttribute("error", "모든 정보를 입력해주세요.");
-            return "redirect:/signIn/signInView";
+   /* @GetMapping("/test/login")
+    public @ResponseBody String loginTest(Authentication authentication) {
+        System.out.println("testlogin======================");
+        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+        System.out.println("authentication:"+principalDetails.getUser());
+        return "세션정보확인";
+    }*/
+
+        //일반 오어스 로그인 모두 다 한가지 타입으로 받아올 수 있다.
+        @GetMapping("/user")
+        public  @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+            System.out.println(principalDetails.getMember());
+            return "user";
         }
-        boolean result = memberService.login(signInDTO);
 
-        if (result == true) {
-            //랭킹창 반환
-            return "redirect:User";
-        } else {
-            //로그인 창 반환
-            return "signIn/signIn";
+        @GetMapping("/admin")
+        public  @ResponseBody String admin(){
+            return "admin";
         }
-    }
 
-    @SuppressWarnings("unchecked")
-    @GetMapping("/oauthlogin")
-    public String getLoginPage(Model model) throws Exception {
-        System.out.println("fffffffffffffffffffffff");
-        Iterable<ClientRegistration> clientRegistrations = null;
-        ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
-                .as(Iterable.class);
-        if (type != ResolvableType.NONE &&
-                ClientRegistration.class.isAssignableFrom(type.resolveGenerics()[0])) {
-            clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
+        //시큐리티의 인증 로그인이 낚아쳐버림... -> 작동하지 않게 기스에이블 해주었음
+        @GetMapping("/signIn/signIn")
+        public String loginFrom(){
+            return "/signIn/signIn";
         }
-        assert clientRegistrations != null;
-        clientRegistrations.forEach(registration ->
-                oauth2AuthenticationUrls.put(registration.getClientName(),
-                        authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
-        model.addAttribute("urls", oauth2AuthenticationUrls);
 
-        return "signIn/signIn";
+
     }
-}
