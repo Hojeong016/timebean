@@ -29,7 +29,7 @@ public class SignUpController {
     public String signUp(@Valid @ModelAttribute("signUpDTO") SignUpDTO signUpDTO, BindingResult bindingResult, Model model){
         try {
             // 아이디, 닉네임, 이메일 중복 검사
-            memberService.existsByMemberId(signUpDTO);
+            memberService.existsByAccountId(signUpDTO);
             memberService.existsByNickname(signUpDTO);
             memberService.existsByEmail(signUpDTO);
 

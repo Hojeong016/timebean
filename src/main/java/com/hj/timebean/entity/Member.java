@@ -56,5 +56,4 @@ public class Member {
     public void prePersist() {
         createdDate = LocalDate.now();
     }
-
 }

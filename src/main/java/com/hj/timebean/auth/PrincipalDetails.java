@@ -43,7 +43,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     //해당 유저의 권한을 리턴하는 곳
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        System.out.println("착을 수 없습니다.3");
        // user.getRole(); // r런데 권한이 String 타입,,, 그래서 이 아이를 리턴 불가능 따라서 타입을 맞춰줘야한다.
         Collection<GrantedAuthority> collect = new ArrayList<GrantedAuthority>();
          //그럼 이제 스트링을 리펀할 수 있는 ,,, 메서드를 오버라이딩 할 수 있다..
@@ -92,4 +91,8 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     }
     //언제 f? = 예를 들어 회원이 1년간 로그인을 하지 않아 휴면 계정으로 하기로 함
     // 현재 시간 - 로깅 시간 => 1년 초과 시 리턴을 f로 한다..
+
+    public Member getMember() {
+        return member;
+    }
 }

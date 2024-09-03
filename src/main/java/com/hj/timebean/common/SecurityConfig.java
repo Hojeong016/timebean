@@ -41,6 +41,8 @@ public class SecurityConfig { //extends WebSecurityConfigurerAdapter -> 지원 �
 
         http.formLogin(formLogin -> formLogin // 커스텀 마이징한 로그인 설정을 인자로 fromLogin() 메서드에 넘긴다.
                         .loginPage("/signIn/signIn")// 설정 안하면 접근 제한 페이지 호출 시 -- 접근 에러 .. 이 거 설정하면 자격이 없는 경우 login으로 리다리렉션 됨
+                        .usernameParameter("accountId")
+                        .passwordParameter("password")
                         .permitAll()
                         .defaultSuccessUrl("/", true)
                 // 요청처리 url 설정 //login 호출이 된다 즉 시쿠리티가 낚아채서 대신 로그인 진행 -> 이에 따라 controller에 로그인을 만들지 않아도 된다.
@@ -49,7 +51,7 @@ public class SecurityConfig { //extends WebSecurityConfigurerAdapter -> 지원 �
 
         http.oauth2Login(oauth2 ->
                 oauth2
-                        .loginPage("/loginForm")
+                        .loginPage("/signIn/signIn")
                         .userInfoEndpoint(userinfo -> // 사용자의 정보를 가져오기 위해 사용됨,,,
                                 userinfo
                                         .userService(principalOauth2UserService)

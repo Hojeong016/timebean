@@ -8,25 +8,25 @@
 <body>
     <div class="left-side">
         <!-- 프로필 카드 -->
-        <div class="profile-card">
+        <div class="profile-card" th:if="${memberDetails != null}">
             <!-- 프로필 사진 -->
             <div class="profile-image"></div>
             <!-- 프로필 상세 정보 -->
             <div class="profile-details">
-                <div><strong>이름:</strong> John Doe</div>
-                <div><strong>시간:</strong> 3시간 15분</div>
+                <div><strong>이름:</strong> <span th:text="${memberDetails.nickname}"></span></div>
+                <div><strong>시간:</strong> <span th:text="${rankingDetails.totalTime}"></span></div>
                 <div><strong>랭크:</strong> 1위</div>
             </div>
         </div>
     </div>
     <div class="content">
-        <h1 style="margin-top: 30px;">Today's Top3 Ranking</h1>
+        <h1 style="margin-top: 30px;">오늘의 Top 10</h1>
         <table border="1">
             <thead>
             <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Total Time</th>
+                <th>순위</th>
+                <th>닉네임</th>
+                <th>총 시간</th>
             </tr>
             </thead>
             <tbody>
@@ -42,21 +42,31 @@
     <div class="right-side">
         <div class="sign">
             <!-- 로그인 및 회원가입 버튼 -->
-            <button class="signIn-button" onclick="window.location.href='/signIn/signIn'">로그인</button>
-            <button class="signup-button" onclick="window.location.href='/signUp/signUpView'">회원가입</button>
+            <div th:if="${memberDetails == null}">
+                <button class="signIn-button" onclick="window.location.href='/signIn/signIn'">로그인</button>
+                <button class="signup-button" onclick="window.location.href='/signUp/signUpView'">회원가입</button>
+            </div>
+            <div th:if="${memberDetails != null}">
+                <button class="signIn-button" onclick="window.location.href='/logout'">로그아웃</button>
+            </div>
         </div>
         <!-- 노란색 div에 todoList 추가 -->
         <div class="todo-list">
             <h2>Todo List</h2>
             <!-- 할 일을 입력하는 텍스트 박스 -->
-            <input type="text" id="todoInput" placeholder="할 일을 입력하세요">
-            <!-- 작성 버튼 -->
-            <button onclick="addTodo()">작성</button>
-            <!-- 선 -->
-            <div class="divider"></div>
-            <!-- 할 일 목록 -->
-            <div id="todoList">
-                <!-- 여기에 동적으로 할 일 목록이 추가될 예정 -->
+            <div th:if="${memberDetails != null}">
+                <input type="text" id="todoInput" placeholder="할 일을 입력하세요" >
+                <!-- 작성 버튼 -->
+                <button onclick="addTodo()">작성</button>
+                <!-- 선 -->
+                <div class="divider"></div>
+                <!-- 할 일 목록 -->
+                <div id="todoList">
+                    <!-- 여기에 동적으로 할 일 목록이 추가될 예정 -->
+                </div>
+            </div>
+            <div th:if="${memberDetails == null}">
+                <span>로그인 후 사용해주세요.</span>
             </div>
         </div>
         <script>

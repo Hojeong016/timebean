@@ -21,6 +21,11 @@ public class RankingServiceImpl implements RankingService{
     }
 
     @Override
+    public Ranking findByMemberId(Long memberId) {
+        return rankingRepository.findByMemberId(memberId);
+    }
+
+    @Override
     public List<Ranking> findByRecordedDate() {
         // 오늘 날짜 구하기
         LocalDate today = LocalDate.now();
@@ -29,10 +34,10 @@ public class RankingServiceImpl implements RankingService{
     }
 
     @Override
-    public List<Ranking> getTop3Ranking(List<Ranking> rankingList) {
+    public List<Ranking> getTopTenRanking(List<Ranking> rankingList) {
         Collections.sort(rankingList);
 
-        return rankingList.stream().limit(3).collect(Collectors.toList());
+        return rankingList.stream().limit(10).collect(Collectors.toList());
 //        return rankingList.stream()
 //                .sorted(Comparator.comparingInt(Ranking::getTotalTime).reversed())
 //                .limit(3)

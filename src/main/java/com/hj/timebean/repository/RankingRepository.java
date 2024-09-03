@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface RankingRepository extends JpaRepository<Ranking, Long> {
 
+    Ranking findByMemberId(Long memberId);
     List<Ranking> findByRecordedDate(LocalDate recordedDate);
 }

@@ -10,9 +10,8 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member,Integer> {
 
     Member findByAccountId(String accountId); // Jpa query method
-
     // 아이디 중복검사
-    boolean existsByAccountId(String memberID);
+    boolean existsByAccountId(String accountId);
     // 닉네임 중복검사
     boolean existsByNickname(String nickname);
     // email 중복검사
@@ -20,5 +19,4 @@ public interface MemberRepository extends JpaRepository<Member,Integer> {
     //findBy 규칙 -> Username 문법
     // select * from user where username = ?
     //jpa name 함수
-
 }
