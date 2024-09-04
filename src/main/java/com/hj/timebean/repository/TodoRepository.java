@@ -10,4 +10,6 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
     List<Todo> findByMemberId(Long memberId);
 
     List<Todo> findByStatus(boolean status);
+
+    List<Todo> findByMemberIdAndStatus(Long memberId, boolean status);
 }

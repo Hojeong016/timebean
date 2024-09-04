@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class RankingServiceImpl implements RankingService{
-
     private final RankingRepository rankingRepository;
 
     @Autowired

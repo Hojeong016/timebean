@@ -1,5 +1,7 @@
 package com.hj.timebean.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -13,6 +15,8 @@ public class Todo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
+    //@JsonManagedReference // 순환 참조 방지
+    @JsonIgnore // 이 필드를 직렬화에서 제외
     private Member member;
 
     @Column(name = "text")

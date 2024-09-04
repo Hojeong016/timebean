@@ -3,16 +3,17 @@ package com.hj.timebean.service.member;
 import com.hj.timebean.dto.SignUpDTO;
 import com.hj.timebean.entity.Member;
 import com.hj.timebean.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MemberServiceImp implements MemberService {
-
+public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public MemberServiceImp(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    @Autowired
+    public MemberServiceImpl(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.memberRepository = memberRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
