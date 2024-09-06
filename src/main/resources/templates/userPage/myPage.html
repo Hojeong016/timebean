@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Page</title>
+  <link rel="stylesheet" href="/css/myPage.css">
+</head>
+<body>
+
+<!-- 입체감 있는 헤더 -->
+<header>
+  My Page
+</header>
+
+<div class="mypage-container">
+  <!-- 왼쪽 메뉴 목록 -->
+  <div class="menu">
+    <ul>
+      <li><a href="#" id="myInfoBtn">나의 정보</a></li>
+      <li><a href="#" id="myActivityBtn">나의 활동</a></li>
+    </ul>
+  </div>
+
+  <!-- 오른쪽 내용 표시 영역 -->
+  <div class="content">
+    <!-- 나의 정보 -->
+    <div id="myInfo" class="content-section">
+      <h2></h2>
+      <img src="/images/profile-pic.png" alt="Profile Picture" class="profile-pic">
+      <p> <span>회원 닉네임</span> </p>
+      <p> <span>user@test.com</span></p>
+      <p><strong>최종 정보 수정일:</strong> <span>2019.4.9</span></p>
+      <button id="editBtn">수정하기</button>
+
+      <!-- 수정할 수 있는 폼 -->
+      <div id="editForm" style="display: none;">
+        <input type="text" placeholder="아이디" name="accountId">
+        <input type="text" placeholder="이메일" name="email">
+        <input type="password" placeholder="새 비밀번호" name="password">
+        <input type="text" placeholder="닉네임" name="nickname">
+        <input type="password" placeholder="타이머 비밀번호" name="timerPassword">
+        <p> </p>
+        <button type="submit">수정 완료</button>
+        <button id="cancelEditBtn">수정 취소</button>
+      </div>
+    </div>
+
+    <!-- 나의 활동 -->
+    <div id="myActivity" class="content-section" style="display: none;">
+      <h2>나의 활동</h2>
+      <p>여기에 '나의 활동' 내용이 표시됩니다.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // '나의 정보' 탭 클릭
+  document.getElementById("myInfoBtn").addEventListener("click", function() {
+    document.getElementById("myInfo").style.display = "flex"; // 중앙 정렬 유지
+    document.getElementById("myActivity").style.display = "none";
+  });
+
+  // '나의 활동' 탭 클릭
+  document.getElementById("myActivityBtn").addEventListener("click", function() {
+    document.getElementById("myInfo").style.display = "none";
+    document.getElementById("myActivity").style.display = "flex"; // 중앙 정렬 유지
+  });
+
+  // 수정하기 버튼 클릭
+  document.getElementById("editBtn").addEventListener("click", function() {
+    document.getElementById("editForm").style.display = "block";
+  });
+
+  // 수정 취소 버튼 클릭
+  document.getElementById("cancelEditBtn").addEventListener("click", function() {
+    document.getElementById("editForm").style.display = "none";
+  });
+</script>
+</body>
+</html>
