@@ -29,6 +29,10 @@ public class RankingController {
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
             Ranking rankingDetails = rankingService.findByMemberId(principalDetails.getMember().getId());
 
+            if (rankingDetails == null) {
+                rankingDetails = new Ranking();
+            }
+
             model.addAttribute("memberDetails", principalDetails.getMember());
             model.addAttribute("rankingDetails", rankingDetails);
         }
