@@ -1,55 +1,85 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 div.header{
+    margin: 0 auto;
     position: fixed;
     display: flex;
     background: fixed;
     align-items: center;
-    width: 99%;
+    width: 100%;
     height: 65px;
     background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
     z-index: 1;
     border-radius: 10px;
+    overflow: hidden;
+    /*width: calc(100% - 15px);*/
 }
 div#left{
-    width: 20%;
+    flex-basis: 25%;
+    width: 25%;
     text-align: left;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 div#center{
-    width: 60%;
+    flex-basis: 50%;
+    width: 50%;
     max-height: 100%;
     text-align: center;
 }
 div#right{
+    flex-basis: 25%;
+    width: 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 20%;
-    text-align: right;
-    margin-right: 20px;
+    /*text-align: right;*/
+    /*margin-right: 20px;*/
 }
 /* 로그인 및 회원가입 버튼 스타일 */
 .sign {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* 좌우로 버튼 배열 */
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* 버튼 사이 간격 */
 }
+
 .signIn-button, .signup-button {
     background-color: #528057;
     color: #ffffff;
     padding: 10px 20px;
     border: none;
-    border-radius: 20px; /* 모서리를 둥글게 */
+    border-radius: 20px; /* 기본적으로 직사각형 모서리 */
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+    width: auto; /* 기본 크기는 자동 */
+    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 */
 }
-.signIn-button {
-    /* 로그인 버튼에 대한 스타일 */
-    margin-right: 10px; /* 회원가입 버튼과의 간격 조정 */
-}
+
 .signIn-button:hover, .signup-button:hover {
-    background-color: #a7c058; /* 버튼을 누르면 색 변함 */
+    background-color: #a7c058;
     color: #ffffff;
 }
+
+/* 반응형 디자인: 작은 화면일 때 버튼이 동그랗고 작아지도록 */
+@media (max-width: 768px) {
+    .signIn-button, .signup-button {
+        width: 40px; /* 버튼 너비를 작게 */
+        height: 40px; /* 정사각형으로 */
+        border-radius: 50%; /* 버튼을 동그랗게 */
+        padding: 0; /* 패딩 제거 */
+        font-size: 0.6rem; /* 작은 폰트 크기 */
+    }
+
+    .sign {
+        gap: 5px; /* 작은 화면에서는 버튼 사이 간격 줄이기 */
+    }
+}
+
 input.main_logo-button {
     background: url("../images/timebean_main_logo.png") no-repeat;
     background-size:contain;

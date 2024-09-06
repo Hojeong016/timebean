@@ -24,10 +24,10 @@
 .center-content {
     width: 50vw;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0; /* 위쪽만 둥글게 */
     background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* padding과 border를 포함한 요소의 크기 지정 */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1), 2px 0 5px rgba(0, 0, 0, 0.1); /* 양 옆에만 그림자 */
+    box-sizing: border-box;
 }
 .right-side {
     float: right;
@@ -60,6 +60,7 @@ table {
     width: 80%;
     margin: 0 auto;
     position: relative;
+    /*border: 1px solid #E3F1D5;*/
 }
 
 thead tr {
@@ -117,9 +118,6 @@ tbody tr:hover {
 /* 프로필 카드 스타일 */
 .profile-card {
     position: relative;
-    display: flex;
-    flex-direction: column; /* 세로로 배치 */
-    align-items: center;
     width: 10vw;
     height: 200px;
     background-color: white;
@@ -127,12 +125,19 @@ tbody tr:hover {
     border-radius: 10px;
     margin-bottom: 40px;
 }
+.memberDetailsIsNotNull, .memberDetailsIsNull {
+    display: flex;
+    flex-direction: column; /* 세로로 배치 */
+    align-items: center;
+}
 .profile-image {
-    background: url("../images/profile_image.png") no-repeat;
-    background-size:contain;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    background: url("../images/profile_image.png") no-repeat center center;
+    background-size: cover; /* 이미지를 컨테이너에 꽉 차게 */
+    width: 100%; /* 컨테이너에 맞게 너비 조정 */
+    max-width: 100px; /* 최대 너비를 설정하여 너무 커지지 않게 함 */
+    height: auto; /* 높이를 자동으로 맞춤 */
+    aspect-ratio: 1 / 1; /* 가로세로 비율을 1:1로 유지하여 원형 유지 */
+    border-radius: 50%; /* 원형 이미지 유지 */
     margin-bottom: 20px;
     background-color: #ccc; /* 프로필 사진이 없는 경우를 대비한 배경색 */
 }

@@ -17,7 +17,7 @@
                 <!-- 프로필 카드 -->
 <!--                <div class="profile-card" th:classappend="${memberDetails == null} ? 'centered-card'">-->
                 <div class="profile-card">
-                    <div th:if="${memberDetails != null}">
+                    <div class="memberDetailsIsNotNull" th:if="${memberDetails != null}">
                         <!-- 프로필 사진 -->
                         <div class="profile-image"></div>
                         <!-- 프로필 상세 정보 -->
@@ -27,7 +27,7 @@
                             <div><strong>랭크:</strong> 1위</div>
                         </div>
                     </div>
-                    <div th:if="${memberDetails == null}">
+                    <div class="memberDetailsIsNull" th:if="${memberDetails == null}">
                         <div class="profile-image"></div>
                         <small>로그인 후 사용이 가능해요.</small>
                     </div>
