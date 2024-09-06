@@ -1,10 +1,17 @@
 /* 수평 가운데 정렬 */
-body {
+.layout-container {
     display: flex;
     justify-content: center;
     height: 100vh;
     position: relative;
-    background-color: #f7f7f7; /* 연한 분홍색 */
+    background-color: #eeefcf;
+    border-radius: 10px;
+    font-family: "Signika", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: <weight>;
+      font-style: normal;
+      font-variation-settings:
+        "GRAD" 0;
 }
 .left-side {
     float: left;
@@ -14,11 +21,11 @@ body {
     flex-direction: column;
     align-items: center;
 }
-.content {
-    width: 60vw;
+.center-content {
+    width: 50vw;
     text-align: center;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     box-sizing: border-box; /* padding과 border를 포함한 요소의 크기 지정 */
 }
@@ -30,48 +37,67 @@ body {
     flex-direction: column;
     align-items: center;
 }
-.sign {
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-}
-/* 로그인 및 회원가입 버튼 스타일 */
-.signIn-button, .signup-button {
-    background-color: #A1CEBD;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px; /* 모서리를 둥글게 */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.signIn-button {
-    /* 로그인 버튼에 대한 스타일 */
-    margin-right: 10px; /* 회원가입 버튼과의 간격 조정 */
-}
-.signIn-button:hover, .signup-button:hover {
-    background-color: #7EBCAB; /* 버튼을 누르면 색 변함 */
-    color: #ffffff;
-}
-
 /*테이블*/
 /* 테이블 폭 조정 */
-table {
-    width: 80%; /* content 폭과 같게 설정 */
+/*table {
+    width: 80%;
     border-collapse: collapse;
     text-align: center;
-    margin: 0 auto; /* 가운데 정렬을 위해 추가 */
+    margin: 0 auto;
 }
 th, td {
     padding: 8px;
     border: 1px solid black;
+}*/
+/* 테이블 스타일 */
+table {
+    border-spacing: 0; /* 셀 간의 간격을 없앰 */
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 800px;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
 }
+
+thead tr {
+    height: 60px;
+    background: #b9df88;
+    font-size: 16px;
+    border-bottom: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 아래쪽 그림자 추가 */
+}
+
+tbody tr {
+    height: 48px;
+    border-bottom: 1px solid #E3F1D5; /* 가로 구분선만 남김 */
+}
+
+td, th {
+    border-left: none; /* 세로 구분선 제거 */
+    border-right: none; /* 세로 구분선 제거 */
+}
+
+/* 마우스 오버시 효과 */
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    table {
+        width: 90%; /* 모바일에서 더 좁게 표시 */
+    }
+}
+
 
 /*todoList*/
 .todo-list {
     position: fixed;
     top: 100px;
-    background-color: #EAEAEA;
+    background-color: white;
     padding: 1vw;
     margin-top: 20px;
     width: 15vw;
@@ -96,12 +122,14 @@ th, td {
     align-items: center;
     width: 10vw;
     height: 200px;
-    background-color: #f0f0f0;
+    background-color: white;
     padding: 3vw;
     border-radius: 10px;
     margin-bottom: 40px;
 }
 .profile-image {
+    background: url("../images/profile_image.png") no-repeat;
+    background-size:contain;
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -110,4 +138,21 @@ th, td {
 }
 .profile-details {
     flex: 1;
+}
+
+/* 작은 화면에 대한 반응형 스타일 */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .content {
+        width: 100%;
+    }
 }

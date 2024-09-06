@@ -27,7 +27,7 @@ body {
 }
 
 .signIn-button {
-    background-color: #A1CEBD;
+    background-color: #528057;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
@@ -41,7 +41,7 @@ body {
 }
 
 .signIn-button:hover {
-    background-color: #7EBCAB;
+    background-color: #3f6d4e;
     color: #ffffff;
 }
 

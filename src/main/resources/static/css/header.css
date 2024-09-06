@@ -1,0 +1,99 @@
+div.header{
+    position: fixed;
+    display: flex;
+    background: fixed;
+    align-items: center;
+    width: 99%;
+    height: 65px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    z-index: 1;
+    border-radius: 10px;
+}
+div#left{
+    width: 20%;
+    text-align: left;
+    margin-left: 20px;
+}
+div#center{
+    width: 60%;
+    max-height: 100%;
+    text-align: center;
+}
+div#right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    text-align: right;
+    margin-right: 20px;
+}
+/* 로그인 및 회원가입 버튼 스타일 */
+.sign {
+    display: flex;
+    flex-direction: row;
+}
+.signIn-button, .signup-button {
+    background-color: #528057;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px; /* 모서리를 둥글게 */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.signIn-button {
+    /* 로그인 버튼에 대한 스타일 */
+    margin-right: 10px; /* 회원가입 버튼과의 간격 조정 */
+}
+.signIn-button:hover, .signup-button:hover {
+    background-color: #a7c058; /* 버튼을 누르면 색 변함 */
+    color: #ffffff;
+}
+input.main_logo-button {
+    background: url("../images/timebean_main_logo.png") no-repeat;
+    background-size:contain;
+    border: 0;
+    height: 60px;
+    width: 60px;
+}
+/*
+input.profile-button {
+    background: url("../image/profile-icon.png") no-repeat;
+    background-size:contain;
+    border: 0;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+input.login-button {
+    background: url("../image/login-icon.png") no-repeat;
+    background-size:contain;
+    border: 0;
+    width: 30px;
+    height: 30px;
+}
+input.logout-button {
+    background: url("../image/logout-icon.png") no-repeat;
+    background-size:contain;
+    border: 0;
+    width: 30px;
+    height: 30px;
+}
+input.search-button {
+    background: url("../image/search-icon.png") no-repeat;
+    background-size:contain;
+    border: 0;
+    width: 30px;
+    height: 30px;
+}
+input.basket-button {
+    background: url("../image/basket-icon.png") no-repeat;
+    background-size:contain;
+    border: 0;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+*/

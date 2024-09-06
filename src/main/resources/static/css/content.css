@@ -1,0 +1,4 @@
+div.content {
+    padding-top: 70px;
+    height: 100vh; /* 뷰포트 높이의 100% */
+}
