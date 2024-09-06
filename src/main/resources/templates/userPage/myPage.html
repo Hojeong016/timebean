@@ -25,25 +25,27 @@
   <!-- 오른쪽 내용 표시 영역 -->
   <div class="content">
     <!-- 나의 정보 -->
-    <div id="myInfo" class="content-section">
+    <div id="myInfo" class="content-section" th:if="${member != null}">
       <h2></h2>
       <img src="/images/profile-pic.png" alt="Profile Picture" class="profile-pic">
-      <p> <span>회원 닉네임</span> </p>
-      <p> <span>user@test.com</span></p>
-      <p><strong>최종 정보 수정일:</strong> <span>2019.4.9</span></p>
+      <p> <span th:text="${member.nickname}"></span> </p>
+      <p> <span th:text="${member.email}"></span></p>
+      <p><strong>최종 정보 수정일:</strong> <span th:text="${member.updatedDate}"> </span></p>
       <button id="editBtn">수정하기</button>
 
       <!-- 수정할 수 있는 폼 -->
-      <div id="editForm" style="display: none;">
-        <input type="text" placeholder="아이디" name="accountId">
-        <input type="text" placeholder="이메일" name="email">
-        <input type="password" placeholder="새 비밀번호" name="password">
-        <input type="text" placeholder="닉네임" name="nickname">
-        <input type="password" placeholder="타이머 비밀번호" name="timerPassword">
-        <p> </p>
-        <button type="submit">수정 완료</button>
-        <button id="cancelEditBtn">수정 취소</button>
-      </div>
+      <form action="/updateForm" method="post">
+        <div id="editForm" style="display: none;">
+          <input type="text" placeholder="이메일" name="email">
+          <input type="password" placeholder="새 비밀번호" name="password">
+          <input type="text" placeholder="닉네임" name="nickname">
+          <input type="password" placeholder="타이머 비밀번호" name="timerPassword">
+          <p> </p>
+          <button type="submit">수정 완료</button>
+          <button id="cancelEditBtn">수정 취소</button>
+        </div>
+      </form>
+
     </div>
 
     <!-- 나의 활동 -->
