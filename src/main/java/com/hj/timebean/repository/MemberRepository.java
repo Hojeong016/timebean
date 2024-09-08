@@ -24,6 +24,11 @@ public interface MemberRepository extends JpaRepository<Member,Integer> {
                        @Param("nickname") String nickname,
                        @Param("timerPassword") int timerPassword,
                        @Param("updateTime") LocalDate updateTime);
+
+    @Modifying
+    @Query("UPDATE Member SET profileImage = :profileImg WHERE accountId = :accountId")
+    void updateProfileImg(@Param("accountId") String accountId,
+                          @Param("profileImg") byte[] profileImg);
     // 아이디 중복검사
     boolean existsByAccountId(String accountId);
     // 닉네임 중복검사

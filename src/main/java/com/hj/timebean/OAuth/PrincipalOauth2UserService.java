@@ -40,6 +40,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String accountId = provider+"_"+providerId;
         String email = oAuth2User.getAttribute("email");
 /*        String password = oAuth2User.getAttribute(bCryptPasswordEncoder.encode("겟인데어"));*/
+        String profileUrl = oAuth2User.getAttribute("picture");
         String role = "ROLE_USER";
 
        Member memberEntity = memberRepository.findByAccountId(accountId);
@@ -51,6 +52,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                    .role(role)
                    .provider(provider)
                    .providerId(providerId)
+                   .profileUrl(profileUrl)
                    .build();
 
            memberRepository.save(memberEntity);
