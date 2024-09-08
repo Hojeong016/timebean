@@ -10,8 +10,10 @@ public interface RankingService {
     Ranking findByMemberId(Long memberId);
     // 해당 날짜로 랭킹 데이터 가져오기
     public List<Ranking> findByRecordedDate();
-    // 해당 개수만큼만 랭킹 데이터 가져오기
-    public List<Ranking> getTopTenRanking(List<Ranking> rankingList);
+    // 모든 랭킹 데이터 조회
+    public List<Ranking> findAll();
+    // 해당 개수만큼만 랭킹 데이터 가져오기, 현재 사용 안함
+    public List<Ranking> getTopHundredRanking(List<Ranking> rankingList);
     // 사용자의 랭크 순위를 가져오기
     public List<MemberRankDTO> getAllRankingsWithRank();
 }

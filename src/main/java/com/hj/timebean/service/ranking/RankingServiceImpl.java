@@ -4,6 +4,8 @@ import com.hj.timebean.dto.MemberRankDTO;
 import com.hj.timebean.entity.Ranking;
 import com.hj.timebean.repository.RankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@CacheConfig(cacheNames = "rankings")
 public class RankingServiceImpl implements RankingService{
     private final RankingRepository rankingRepository;
 
@@ -36,10 +39,17 @@ public class RankingServiceImpl implements RankingService{
     }
 
     @Override
-    public List<Ranking> getTopTenRanking(List<Ranking> rankingList) {
+    @Cacheable(key = "'allRankings'", unless = "#result == null || #result.isEmpty()")
+    public List<Ranking> findAll() {
+        System.out.println("findAll Fetching data from DB...");
+        return rankingRepository.findAll();
+    }
+
+    @Override
+    public List<Ranking> getTopHundredRanking(List<Ranking> rankingList) {
         Collections.sort(rankingList);
 
-        return rankingList.stream().limit(10).collect(Collectors.toList());
+        return rankingList.stream().limit(100).collect(Collectors.toList());
 //        return rankingList.stream()
 //                .sorted(Comparator.comparingInt(Ranking::getTotalTime).reversed())
 //                .limit(3)
@@ -47,7 +57,10 @@ public class RankingServiceImpl implements RankingService{
     }
 
     @Override
+    @Cacheable(key = "'allTodayRankings'", unless = "#result == null || #result.isEmpty()")
     public List<MemberRankDTO> getAllRankingsWithRank() {
+        System.out.println("getAllRankingsWithRank Fetching data from DB...");
+
         List<Object[]> results = rankingRepository.findAllRankingsWithRank();
         List<MemberRankDTO> memberRankDTO = new ArrayList<>();
 
