@@ -24,7 +24,7 @@
                         <div class="profile-details">
                             <div><strong>이름:</strong> <span th:text="${memberDetails.nickname}"></span></div>
                             <div><strong>시간:</strong> <span th:text="${rankingDetails.totalTime}"></span></div>
-                            <div><strong>랭크:</strong> 1위</div>
+                            <div><strong>랭크:</strong></div>
                         </div>
                     </div>
                     <div class="memberDetailsIsNull" th:if="${memberDetails == null}">
@@ -45,11 +45,16 @@
                     </thead>
                     <tbody>
                         <!-- 랭킹 목록을 순회하며 출력 -->
-                        <tr th:each="rank, status : ${todayRankingList}">
-                            <td th:text="${status.index + 1}"></td>
-                            <td th:text="${rank.member.nickname}"></td>
-                            <td th:text="${rank.totalTime + '&nbsp;콩'}"></td>
+                        <tr th:each="ranking, status : ${memberRankList}">
+                            <td th:text="${ranking.rank}"></td>
+                            <td th:text="${ranking.nickname}"></td>
+                            <td th:text="${ranking.totalTime + '&nbsp;콩'}"></td>
                         </tr>
+<!--                        <tr th:each="rank, status : ${todayRankingList}">-->
+<!--                            <td th:text="${status.index + 1}"></td>-->
+<!--                            <td th:text="${rank.member.nickname}"></td>-->
+<!--                            <td th:text="${rank.totalTime + '&nbsp;콩'}"></td>-->
+<!--                        </tr>-->
                     </tbody>
                 </table>
             </div>

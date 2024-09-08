@@ -1,6 +1,7 @@
 package com.hj.timebean.controller;
 
 import com.hj.timebean.auth.PrincipalDetails;
+import com.hj.timebean.dto.MemberRankDTO;
 import com.hj.timebean.entity.Ranking;
 import com.hj.timebean.repository.MemberRepository;
 import com.hj.timebean.service.member.MemberService;
@@ -28,6 +29,7 @@ public class RankingController {
         if (authentication != null) {
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
             Ranking rankingDetails = rankingService.findByMemberId(principalDetails.getMember().getId());
+            List<MemberRankDTO> memberRankList = rankingService.getAllRankingsWithRank();
 
             if (rankingDetails == null) {
                 rankingDetails = new Ranking();
@@ -35,6 +37,7 @@ public class RankingController {
 
             model.addAttribute("memberDetails", principalDetails.getMember());
             model.addAttribute("rankingDetails", rankingDetails);
+            model.addAttribute("memberRankList", memberRankList);
         }
 
         // 오늘 날짜에 해당하는 랭킹 목록 조회
