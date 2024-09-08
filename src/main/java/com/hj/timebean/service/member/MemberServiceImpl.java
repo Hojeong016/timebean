@@ -71,8 +71,13 @@ public class MemberServiceImpl implements MemberService {
                     updateDTO.getNickname(),
                     updateDTO.getTimerPassword(),
                     LocalDate.now());
+    }
 
-
+    @Transactional
+    @Override
+    public void updateProfileImg(String accountId,byte[] profileImg) {
+        System.out.println("accountId : " + accountId + " profileImg : " + profileImg);
+    memberRepository.updateProfileImg(accountId,profileImg);
     }
 
     // 아이디 중복 검사

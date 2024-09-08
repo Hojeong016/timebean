@@ -19,7 +19,7 @@
                 <div class="profile-card">
                     <div class="memberDetailsIsNotNull" th:if="${memberDetails != null}">
                         <!-- 프로필 사진 -->
-                        <div class="profile-image"></div>
+                        <div class="profile-image"><img class="profile-url" th:src="${memberDetails.getProfileUrl()}" alt="Image"/></div>
                         <!-- 프로필 상세 정보 -->
                         <div class="profile-details">
                             <div><strong>이름:</strong> <span th:text="${memberDetails.nickname}"></span></div>

@@ -8,7 +8,7 @@
     border-radius: 10px;
     font-family: "Signika", sans-serif;
       font-optical-sizing: auto;
-      font-weight: <weight>;
+      font-weight: 400;
       font-style: normal;
       font-variation-settings:
         "GRAD" 0;
@@ -116,7 +116,7 @@ tbody tr:hover {
 
 /*프로필 카드*/
 /* 프로필 카드 스타일 */
-.profile-card {
+.profile-card{
     position: relative;
     width: 10vw;
     height: 200px;
@@ -131,15 +131,29 @@ tbody tr:hover {
     align-items: center;
 }
 .profile-image {
-    background: url("../images/profile_image.png") no-repeat center center;
+    /*background: url("memberDetails.getProfileUrl()") no-repeat center center;*/
     background-size: cover; /* 이미지를 컨테이너에 꽉 차게 */
     width: 100%; /* 컨테이너에 맞게 너비 조정 */
-    max-width: 100px; /* 최대 너비를 설정하여 너무 커지지 않게 함 */
-    height: auto; /* 높이를 자동으로 맞춤 */
+    max-width: 110px; /* 최대 너비를 설정하여 너무 커지지 않게 함 */
+    height: 100%; /* 높이를 자동으로 맞춤 */
+    max-height: 110px;
     aspect-ratio: 1 / 1; /* 가로세로 비율을 1:1로 유지하여 원형 유지 */
     border-radius: 50%; /* 원형 이미지 유지 */
+    object-fit: cover;
     margin-bottom: 20px;
     background-color: #ccc; /* 프로필 사진이 없는 경우를 대비한 배경색 */
+}
+.profile-url {
+    background-size: cover; /* 이미지를 컨테이너에 꽉 차게 */
+    width: 100%; /* 컨테이너에 맞게 너비 조정 */
+    max-width: 110px; /* 최대 너비를 설정하여 너무 커지지 않게 함 */
+    height: 100%; /* 높이를 자동으로 맞춤 */
+    max-height: 110px;
+    aspect-ratio: 1 / 1; /* 가로세로 비율을 1:1로 유지하여 원형 유지 */
+    border-radius: 50%; /* 원형 이미지 유지 */
+    object-fit: cover;
+    margin-bottom: 20px; /* 프로필 사진이 없는 경우를 대비한 배경색 */
+
 }
 .profile-details {
     flex: 1;
@@ -159,5 +173,10 @@ tbody tr:hover {
 
     .content {
         width: 100%;
+    }
+
+    .profile-url .profile-image {
+        width: 40px; /* 버튼 너비를 작게 */
+        height: 40px; /* 정사각형으로 */
     }
 }

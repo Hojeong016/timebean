@@ -8,13 +8,11 @@
 </head>
 <body>
 
-<!-- 입체감 있는 헤더 -->
 <header>
   My Page
 </header>
 
 <div class="mypage-container">
-  <!-- 왼쪽 메뉴 목록 -->
   <div class="menu">
     <ul>
       <li><a href="#" id="myInfoBtn">나의 정보</a></li>
@@ -22,33 +20,45 @@
     </ul>
   </div>
 
-  <!-- 오른쪽 내용 표시 영역 -->
   <div class="content">
-    <!-- 나의 정보 -->
     <div id="myInfo" class="content-section" th:if="${member != null}">
-      <h2></h2>
-      <img src="/images/profile-pic.png" alt="Profile Picture" class="profile-pic">
-      <p> <span th:text="${member.nickname}"></span> </p>
-      <p> <span th:text="${member.email}"></span></p>
-      <p><strong>최종 정보 수정일:</strong> <span th:text="${member.updatedDate}"> </span></p>
+
+      <h2>나의 정보</h2>
+
+      <form action="/updateProfile" method="post" enctype="multipart/form-data">
+        <div class="profile-pic-container">
+          <!-- 프로필 사진 -->
+          <div class="profile-image">
+            <img class="profile-url" th:src="${member.getProfileImage()}" alt="Image"/>
+          </div>
+          <div class="overlay">
+            <span>프로필 변경하기</span>
+            <input type="file" id="profilePicInput" name="file" style="display: none;">
+          </div>
+        </div>
+
+        <!-- 파일 선택 후 나타나는 업로드 버튼 -->
+        <button type="submit" id="uploadBtn" style="display: none;">업로드</button>
+      </form>
+
+      <p><span th:text="${member.nickname}"></span></p>
+      <p><span th:text="${member.email}"></span></p>
+      <p><strong>최종 정보 수정일:</strong> <span th:text="${member.updatedDate}"></span></p>
       <button id="editBtn">수정하기</button>
 
-      <!-- 수정할 수 있는 폼 -->
       <form action="/updateForm" method="post">
         <div id="editForm" style="display: none;">
           <input type="text" placeholder="이메일" name="email">
           <input type="password" placeholder="새 비밀번호" name="password">
           <input type="text" placeholder="닉네임" name="nickname">
           <input type="password" placeholder="타이머 비밀번호" name="timerPassword">
-          <p> </p>
+          <p></p>
           <button type="submit">수정 완료</button>
           <button id="cancelEditBtn">수정 취소</button>
         </div>
       </form>
-
     </div>
 
-    <!-- 나의 활동 -->
     <div id="myActivity" class="content-section" style="display: none;">
       <h2>나의 활동</h2>
       <p>여기에 '나의 활동' 내용이 표시됩니다.</p>
@@ -57,26 +67,36 @@
 </div>
 
 <script>
-  // '나의 정보' 탭 클릭
   document.getElementById("myInfoBtn").addEventListener("click", function() {
-    document.getElementById("myInfo").style.display = "flex"; // 중앙 정렬 유지
+    document.getElementById("myInfo").style.display = "flex";
     document.getElementById("myActivity").style.display = "none";
   });
 
-  // '나의 활동' 탭 클릭
   document.getElementById("myActivityBtn").addEventListener("click", function() {
     document.getElementById("myInfo").style.display = "none";
-    document.getElementById("myActivity").style.display = "flex"; // 중앙 정렬 유지
+    document.getElementById("myActivity").style.display = "flex";
   });
 
-  // 수정하기 버튼 클릭
   document.getElementById("editBtn").addEventListener("click", function() {
     document.getElementById("editForm").style.display = "block";
   });
 
-  // 수정 취소 버튼 클릭
   document.getElementById("cancelEditBtn").addEventListener("click", function() {
     document.getElementById("editForm").style.display = "none";
+  });
+
+  // 프로필 사진 클릭 시 파일 업로드 입력창 표시
+  document.querySelector(".profile-pic-container .overlay").addEventListener("click", function() {
+    document.getElementById("profilePicInput").click();
+  });
+
+
+  // 파일이 선택되면 업로드 버튼을 표시
+  document.getElementById("profilePicInput").addEventListener("change", function() {
+    const uploadBtn = document.getElementById("uploadBtn");
+    if (this.files && this.files.length > 0) {
+      uploadBtn.style.display = "inline-block"; // 파일이 선택되면 버튼을 표시
+    }
   });
 </script>
 </body>

@@ -52,7 +52,7 @@ header {
 }
 
 .menu a:hover {
-    background-color: #3f6d4e; /* 색상 조정 */
+    background-color: #3f6d4e;
 }
 
 /* 오른쪽 컨텐츠 블록 */
@@ -62,17 +62,17 @@ header {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 600px; /* 너비를 제한하여 화면이 비지 않도록 설정 */
+    max-width: 600px;
 }
 
 /* 나의 정보와 나의 활동을 중앙에 정렬 */
 .content-section {
     display: flex;
     flex-direction: column;
-    align-items: center; /* 수직 중앙 정렬 */
-    justify-content: center; /* 수평 중앙 정렬 */
-    text-align: center; /* 텍스트도 중앙 정렬 */
-    min-height: 400px; /* 컨텐츠의 최소 높이 설정 */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 400px;
 }
 
 /* 제목 스타일 (나의 정보 / 나의 활동) */
@@ -81,15 +81,40 @@ header {
     font-weight: bold;
     margin-bottom: 20px;
     color: black;
-    text-align: center;
 }
 
-/* 프로필 사진 스타일 */
+/* 프로필 사진 컨테이너 */
+.profile-pic-container {
+    position: relative;
+}
+
 .profile-pic {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     margin-bottom: 10px;
+}
+
+/* 오버레이 텍스트 스타일 */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.profile-pic-container:hover .overlay {
+    opacity: 1;
 }
 
 /* 정보 항목 간격 조정 */
@@ -101,7 +126,7 @@ header {
 
 /* 입력 필드 스타일 */
 input {
-    width: 50%; /* 입력 필드 너비를 줄임 */
+    width: 50%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -120,7 +145,7 @@ button {
 }
 
 button:hover {
-    background-color: #3f6d4e; /* 색상 조정 */
+    background-color: #3f6d4e;
 }
 
 /* 수정 취소 버튼 스타일 */
@@ -139,20 +164,34 @@ button:hover {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-top: 20px; /* 폼과 버튼 사이에 여백 추가 */
+    margin-top: 20px;
 }
 
 /* 수정하기와 취소하기 버튼을 폼 하단에 따로 배치 */
 .button-container {
     display: flex;
-    justify-content: space-between; /* 버튼들 사이 공간 조정 */
-    width: 50%; /* 버튼 컨테이너의 너비 설정 */
+    justify-content: space-between;
+    width: 50%;
     margin-top: 20px;
 }
 
 #editForm .button-container button {
-    width: 45%; /* 버튼의 너비 조정 */
-    margin: 0; /* 버튼 사이 여백 제거 */
+    width: 45%;
+    margin: 0;
+}
+
+#uploadBtn {
+    padding: 10px 20px;
+    background-color: #528057;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#uploadBtn:hover {
+    background-color: #3f6d4e;
 }
 
 /* 작은 화면에 대한 반응형 스타일 */
@@ -170,4 +209,5 @@ button:hover {
     .content {
         width: 100%;
     }
+
 }

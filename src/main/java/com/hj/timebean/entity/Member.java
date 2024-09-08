@@ -40,6 +40,13 @@ public class Member {
     @Column(name = "updated_date")
     private LocalDate updatedDate;
 
+    @Lob
+    @Column(name = "profile_image")
+    private byte[] profileImage;
+
+    @Column(name = "profile_url")
+    private String profileUrl;
+
     //읿반 로그인 속성
     private String password;
     private LocalDate last_login;
