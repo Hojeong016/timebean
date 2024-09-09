@@ -1,15 +1,23 @@
 package com.hj.timebean.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 // 랭크를 표시하기 위한 DTO
-public class MemberRankDTO {
+// Redis를 사용하여 데이터를 캐싱할 때, 캐시에 저장되는 객체는 직렬화(Serialization)가 가능해야 함.
+public class MemberRankDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L; // 직렬화 버전 관리, 클래스의 구조가 변경될 때 동일한 serialVersionUID를 사용하면 기존 데이터와의 호환성을 유지할 수 있다.
+
     private Long id;
     private Long memberId;
     private String nickname;
     private int totalTime;
     private LocalDate recordedDate;
     private int rank;
+
+    public MemberRankDTO() {
+    }
 
     public MemberRankDTO(Long id, Long memberId, String nickname, int totalTime, LocalDate recordedDate, int rank) {
         this.id = id;

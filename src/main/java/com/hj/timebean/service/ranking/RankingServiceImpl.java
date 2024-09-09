@@ -5,10 +5,10 @@ import com.hj.timebean.entity.Ranking;
 import com.hj.timebean.repository.RankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,10 +41,10 @@ public class RankingServiceImpl implements RankingService{
     @Override
     @Cacheable(key = "'allRankings'", unless = "#result == null || #result.isEmpty()")
     public List<Ranking> findAll() {
-        System.out.println("findAll Fetching data from DB...");
         return rankingRepository.findAll();
     }
 
+    // 랭킹 데이터를 서버에서 가공
     @Override
     public List<Ranking> getTopHundredRanking(List<Ranking> rankingList) {
         Collections.sort(rankingList);
@@ -57,9 +57,27 @@ public class RankingServiceImpl implements RankingService{
     }
 
     @Override
-    @Cacheable(key = "'allTodayRankings'", unless = "#result == null || #result.isEmpty()")
+    @CachePut(value = "allTodayRankings", key = "'allTodayRankings'")
+    public List<MemberRankDTO> updateRankingsWithCachePut(List<Object[]> results) {
+        System.out.println("DB에서 데이터를 가져와 캐시에 저장 중...");
+
+        List<MemberRankDTO> memberRankDTOList = new ArrayList<>();
+        for (Object[] result : results) {
+            memberRankDTOList.add(new MemberRankDTO(
+                    (Long) result[0], (Long) result[1], (String) result[2],
+                    (Integer) result[3], ((java.sql.Date) result[4]).toLocalDate(),
+                    ((Number) result[5]).intValue()));
+        }
+
+        return memberRankDTOList;
+    }
+
+    // 주기적으로 DB에서 데이터를 가져와 캐시에 저장하는 로직
+    @Override
+    //@Cacheable(key = "'allTodayRankings'", unless = "#result == null || #result.isEmpty()")
+    @CachePut(value = "allTodayRankings", key = "'allTodayRankings'")
     public List<MemberRankDTO> getAllRankingsWithRank() {
-        System.out.println("getAllRankingsWithRank Fetching data from DB...");
+        System.out.println("db에서 불러오는 중..");
 
         List<Object[]> results = rankingRepository.findAllRankingsWithRank();
         List<MemberRankDTO> memberRankDTO = new ArrayList<>();

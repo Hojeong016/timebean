@@ -12,8 +12,12 @@ public interface RankingService {
     public List<Ranking> findByRecordedDate();
     // 모든 랭킹 데이터 조회
     public List<Ranking> findAll();
-    // 해당 개수만큼만 랭킹 데이터 가져오기, 현재 사용 안함
-    public List<Ranking> getTopHundredRanking(List<Ranking> rankingList);
+    // db에서 조회한 랭킹 데이터를 캐시에 저장하는 역할
+    public List<MemberRankDTO> updateRankingsWithCachePut(List<Object[]> results);
     // 사용자의 랭크 순위를 가져오기
     public List<MemberRankDTO> getAllRankingsWithRank();
+    // 해당 개수만큼만 랭킹 데이터 가져오기, 서버에서 데이터 가공, 현재 사용 안함
+    public List<Ranking> getTopHundredRanking(List<Ranking> rankingList);
+
+
 }

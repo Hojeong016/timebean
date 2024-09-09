@@ -56,6 +56,13 @@ dependencies {
 	annotationProcessor('org.projectlombok:lombok')
 	testAnnotationProcessor('org.projectlombok:lombok')
 
+	// Redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// JSR-310
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.16.0'
+//	implementation 'com.fasterxml.jackson.core:jackson-databind'
+
 	//ai
 	//implementation platform("org.springframework.ai:spring-ai-bom:0.8.1-SNAPSHOT")
 	// Replace the following with the starter dependencies of specific modules you wish to use
