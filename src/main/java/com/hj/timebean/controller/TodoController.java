@@ -26,7 +26,7 @@ public class TodoController {
 
     @GetMapping("/todos")
     public List<Todo> getTodos(Authentication authentication) {
-        Long memberId = 0L;
+        long memberId = 0L;
         List<Todo> todoList = new ArrayList<>();
 
         if (authentication != null) {
@@ -34,11 +34,14 @@ public class TodoController {
             memberId = principalDetails.getMember().getId();
             todoList = todoRepository.findByMemberIdAndStatus(memberId, true);
         }
+        System.out.println("todolist ::: " + todoList);
         return  todoList;
     }
 
     @PostMapping("/todos")
     public void addTodo(@RequestBody Todo todoRequest, Authentication authentication) {
+
+        System.out.println(todoRequest);
         if (authentication != null) {
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
             Long memberId = principalDetails.getMember().getId();
@@ -49,6 +52,13 @@ public class TodoController {
 
         todoRepository.save(todoRequest);
     }
+
+//    @PostMapping("/todos")
+//    public void addTodo(@RequestBody Todo todoRequest) {
+//        System.out.println("todo 추가");
+//        todoRequest.setStatus(true); // 기본 값 설정
+//        todoRepository.save(todoRequest);
+//    }
 
     @PutMapping("/todos/{id}")
     public void updateTodoStatus(@PathVariable Long id, @RequestBody Todo todoRequest) {

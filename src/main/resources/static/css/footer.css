@@ -5,6 +5,6 @@ div#footer {
     align-items: center; /* 수평 중앙 정렬 */
     justify-content: center; /* 수직 중앙 정렬 */
     text-align: center;
-    height: 40px;
+    height: 80px;
     background-color: white;
 }

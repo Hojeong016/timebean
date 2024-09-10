@@ -19,9 +19,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 
+//@CacheConfig
 @Configuration
 @EnableCaching
-//@CacheConfig
 public class RedisConfig {
 
     @Value("${spring.data.redis.host}")
@@ -50,8 +50,8 @@ public class RedisConfig {
                 .build();
 
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.activateDefaultTyping(validator, ObjectMapper.DefaultTyping.NON_FINAL);
+        objectMapper.registerModule(new JavaTimeModule()); // LocalDate, LocalDateTime 등의 직렬화 처리
+        objectMapper.activateDefaultTyping(validator, ObjectMapper.DefaultTyping.NON_FINAL); // 타입 정보를 포함한 직렬화
         return objectMapper;
     }
 

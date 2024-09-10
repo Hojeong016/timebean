@@ -19,12 +19,22 @@
                 <div class="profile-card">
                     <div class="memberDetailsIsNotNull" th:if="${memberDetails != null}">
                         <!-- 프로필 사진 -->
-                        <div class="profile-image"><img class="profile-url" th:src="${memberDetails.getProfileUrl()}" alt="Image"/></div>
+                        <div class="profile-image">
+<!--                            <img class="profile-url" th:src="${memberDetails.getProfileUrl()}" alt="Image"/>-->
+                            <img class="profile-url" th:src="${memberDetails.getProfileUrl() != null ? memberDetails.getProfileUrl() : '../images/profile_image.png'}" alt="Image"/>
+                        </div>
                         <!-- 프로필 상세 정보 -->
                         <div class="profile-details">
-                            <div><strong>이름:</strong> <span th:text="${memberDetails.nickname}"></span></div>
-                            <div><strong>시간:</strong> <span th:text="${rankingDetails.totalTime}"></span></div>
-                            <div><strong>랭크:</strong></div>
+                            <div>
+                                <strong>닉네임:&nbsp;</strong> <span th:text="${memberDetails.nickname}"></span>
+                            </div>
+                            <div>
+                                <strong>모은 콩:&nbsp;</strong> <span th:text="${rankingDetails.totalTime}"></span>
+                                <img class="bean-logo" th:src="@{/images/bean_logo.png}" alt="bean logo">
+                            </div>
+                            <div>
+                                <strong>나의 랭크:&nbsp;</strong>
+                            </div>
                         </div>
                     </div>
                     <div class="memberDetailsIsNull" th:if="${memberDetails == null}">
@@ -64,7 +74,12 @@
                     <h2>Todo List</h2>
                     <!-- 할 일을 입력하는 텍스트 박스 -->
                     <div th:if="${memberDetails != null}">
-                        <input type="text" id="todoInput" placeholder="할 일을 입력하세요" >
+<!--                        <form action="/todos" method="post">-->
+<!--                            <input type="text" id="todoInput" name="text" placeholder="할 일을 입력하세요">-->
+<!--                            &lt;!&ndash; 작성 버튼 &ndash;&gt;-->
+<!--                            <button>작성</button>-->
+<!--                        </form>-->
+                        <input type="text" id="todoInput" placeholder="할 일을 입력하세요">
                         <!-- 작성 버튼 -->
                         <button onclick="addTodo()">작성</button>
                         <!-- 선 -->
@@ -182,18 +197,18 @@
                     // }
 
                     // 할 일 목록 추가 함수
-                    function addTodo2() {
-                        var todoInput = document.getElementById("todoInput");
-                        var todoText = todoInput.value;
-                        if (todoText.trim() !== "") {
-                            var todoList = document.getElementById("todoList");
-                            var todoItem = document.createElement("div");
-                            todoItem.className = "todo-item";
-                            todoItem.innerHTML = '<input id="todoCheckbox" type="checkbox"> ' + todoText;
-                            todoList.appendChild(todoItem);
-                            todoInput.value = ""; // 입력 창 비우기
-                        }
-                    }
+<!--                    function addTodo2() {-->
+<!--                        var todoInput = document.getElementById("todoInput");-->
+<!--                        var todoText = todoInput.value;-->
+<!--                        if (todoText.trim() !== "") {-->
+<!--                            var todoList = document.getElementById("todoList");-->
+<!--                            var todoItem = document.createElement("div");-->
+<!--                            todoItem.className = "todo-item";-->
+<!--                            todoItem.innerHTML = '<input id="todoCheckbox" type="checkbox"> ' + todoText;-->
+<!--                            todoList.appendChild(todoItem);-->
+<!--                            todoInput.value = ""; // 입력 창 비우기-->
+<!--                        }-->
+<!--                    }-->
 
                     // document.getElementById("myCheckbox").addEventListener("change", function() {
                     //     var isChecked = this.checked;

@@ -2,7 +2,7 @@
 .layout-container {
     display: flex;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
     position: relative;
     background-color: #eeefcf;
     border-radius: 10px;
@@ -12,6 +12,7 @@
       font-style: normal;
       font-variation-settings:
         "GRAD" 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .left-side {
     float: left;
@@ -24,7 +25,8 @@
 .center-content {
     width: 50vw;
     text-align: center;
-    border-radius: 10px 10px 0 0; /* 위쪽만 둥글게 */
+    /*border-radius: 10px 10px 0 0;*/ /* 위쪽만 둥글게 */
+    border-radius: 10px;
     background-color: white;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1), 2px 0 5px rgba(0, 0, 0, 0.1); /* 양 옆에만 그림자 */
     box-sizing: border-box;
@@ -103,6 +105,7 @@ tbody tr:hover {
     margin-top: 20px;
     width: 15vw;
     border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 /* 할 일 목록 스타일 */
 .todo-item {
@@ -124,6 +127,7 @@ tbody tr:hover {
     padding: 3vw;
     border-radius: 10px;
     margin-bottom: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .memberDetailsIsNotNull, .memberDetailsIsNull {
     display: flex;
@@ -157,6 +161,10 @@ tbody tr:hover {
 }
 .profile-details {
     flex: 1;
+}
+img.bean-logo {
+    width: 12px;
+    height: 12px;
 }
 
 /* 작은 화면에 대한 반응형 스타일 */

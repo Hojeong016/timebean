@@ -10,6 +10,8 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 
 //1. 타입 맞춰주기 : DefaultOAuth2UserService
 //2 후 처리 진행하기
@@ -39,6 +41,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String providerId = oAuth2User.getAttribute("sub");
         String accountId = provider+"_"+providerId;
         String email = oAuth2User.getAttribute("email");
+        String nickname = Objects.requireNonNull(email).split("@")[0];
+        String level = "씨앗";
 /*        String password = oAuth2User.getAttribute(bCryptPasswordEncoder.encode("겟인데어"));*/
         String profileUrl = oAuth2User.getAttribute("picture");
         String role = "ROLE_USER";
@@ -49,6 +53,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
            memberEntity = Member.builder()
                    .accountId(accountId)
                    .email(email)
+                   .nickname(nickname)
+                   .level(level)
                    .role(role)
                    .provider(provider)
                    .providerId(providerId)
