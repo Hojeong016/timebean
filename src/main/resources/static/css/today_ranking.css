@@ -122,7 +122,6 @@ tbody tr:hover {
 .profile-card{
     position: relative;
     width: 10vw;
-    height: 200px;
     background-color: white;
     padding: 3vw;
     border-radius: 10px;
@@ -185,5 +184,9 @@ img.bean-logo {
     .profile-url .profile-image {
         width: 40px; /* 버튼 너비를 작게 */
         height: 40px; /* 정사각형으로 */
+    }
+
+    .profile-details {
+        font-size: 12px; /* Smaller font for small screens */
     }
 }

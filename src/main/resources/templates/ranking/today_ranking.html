@@ -162,11 +162,11 @@
                                 <strong>닉네임:&nbsp;</strong> <span th:text="${memberDetails.nickname}"></span>
                             </div>
                             <div>
-                                <strong>모은 콩:&nbsp;</strong> <span th:text="${rankingDetails.totalTime}"></span>
+                                <strong>모은 콩:&nbsp;</strong> <span th:text="${myRankInfo.totalTime}"></span>
                                 <img class="bean-logo" th:src="@{/images/bean_logo.png}" alt="bean logo">
                             </div>
                             <div>
-                                <strong>나의 랭크:&nbsp;</strong>
+                                <strong>나의 랭크:&nbsp;</strong>  <span th:text="${rank}">
                             </div>
                         </div>
                     </div>

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +27,7 @@ public class RankingServiceImpl implements RankingService{
     }
 
     @Override
-    public Ranking findByMemberId(Long memberId) {
+    public Optional<Ranking> findByMemberId(Long memberId) {
         return rankingRepository.findByMemberId(memberId);
     }
 
@@ -66,7 +67,7 @@ public class RankingServiceImpl implements RankingService{
             memberRankDTOList.add(new MemberRankDTO(
                     (Long) result[0], (Long) result[1], (String) result[2],
                     (Integer) result[3], ((java.sql.Date) result[4]).toLocalDate(),
-                    ((Number) result[5]).intValue()));
+                    ((Long) result[5])));
         }
 
         return memberRankDTOList;
@@ -89,10 +90,42 @@ public class RankingServiceImpl implements RankingService{
                     (String) result[2],                         // nickname
                     (Integer) result[3],                        // totalTime
                     ((java.sql.Date) result[4]).toLocalDate(),  // recordedDate (변환 처리)
-                    ((Number) result[5]).intValue()             // rank
+                    ((Long) result[5])            // rank
             ));
         }
 
         return memberRankDTO;
+    }
+
+    @Override
+    public Optional<MemberRankDTO> getUserRank(Long memberId) {
+        List<Object[]> results = rankingRepository.findUserRank(memberId);
+
+        if (results == null || results.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Object[] result = results.get(0);
+        MemberRankDTO memberRankDTO = new MemberRankDTO(
+                (Long) result[0],                           // id
+                (Long) result[1],                           // member_id
+                (String) result[2],                         // nickname
+                (Integer) result[3],                        // totalTime
+                ((java.sql.Date) result[4]).toLocalDate(),  // recordedDate
+                ((Long) result[5])                          // rank
+        );
+
+        return Optional.of(memberRankDTO);
+    }
+
+    @Override
+    public Optional<MemberRankDTO> getUserRank2(Long memberId) {
+        MemberRankDTO memberRankDTO = rankingRepository.findUserRank2(memberId);
+        System.out.println("memberRankDTO : " + memberRankDTO.toString());
+        if (memberRankDTO == null) {
+            return Optional.empty();
+        }
+
+        return Optional.of(memberRankDTO);
     }
 }

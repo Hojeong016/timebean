@@ -14,12 +14,12 @@ public class MemberRankDTO implements Serializable {
     private String nickname;
     private int totalTime;
     private LocalDate recordedDate;
-    private int rank;
+    private Long rank;
 
     public MemberRankDTO() {
     }
 
-    public MemberRankDTO(Long id, Long memberId, String nickname, int totalTime, LocalDate recordedDate, int rank) {
+    public MemberRankDTO(Long id, Long memberId, String nickname, int totalTime, LocalDate recordedDate, Long rank) {
         this.id = id;
         this.memberId = memberId;
         this.nickname = nickname;
@@ -28,7 +28,7 @@ public class MemberRankDTO implements Serializable {
         this.rank = rank;
     }
 
-    public MemberRankDTO(Long id, Long memberId, int totalTime, LocalDate recordedDate, int rank) {
+    public MemberRankDTO(Long id, Long memberId, int totalTime, LocalDate recordedDate, Long rank) {
         this.id = id;
         this.memberId = memberId;
         this.totalTime = totalTime;
@@ -76,11 +76,23 @@ public class MemberRankDTO implements Serializable {
         this.recordedDate = recordedDate;
     }
 
-    public int getRank() {
+    public Long getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
+    public void setRank(Long rank) {
         this.rank = rank;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberRankDTO{" +
+                "id=" + id +
+                ", memberId=" + memberId +
+                ", nickname='" + nickname + '\'' +
+                ", totalTime=" + totalTime +
+                ", recordedDate=" + recordedDate +
+                ", rank=" + rank +
+                '}';
     }
 }

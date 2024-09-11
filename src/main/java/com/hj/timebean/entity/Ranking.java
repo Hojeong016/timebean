@@ -34,6 +34,13 @@ public class Ranking implements Comparable<Ranking>{
         this.recordedDate = recordedDate;
     }
 
+    public Ranking(Long id, Member member, int totalTime, LocalDate recordedDate) {
+        this.id = id;
+        this.member = member;
+        this.totalTime = totalTime;
+        this.recordedDate = recordedDate;
+    }
+
     public Long getId() {
         return id;
     }
@@ -64,6 +71,16 @@ public class Ranking implements Comparable<Ranking>{
 
     public void setRecordedDate(LocalDate recordedDate) {
         this.recordedDate = recordedDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Ranking{" +
+                "id=" + id +
+                ", member=" + member +
+                ", totalTime=" + totalTime +
+                ", recordedDate=" + recordedDate +
+                '}';
     }
 
     @Override
