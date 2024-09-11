@@ -1,47 +1,21 @@
-package com.hj.timebean.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+package com.hj.timebean.dto;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "todo")
-public class Todo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TodoDTO {
     private Long id;
-
-    //@JsonManagedReference // 순환 참조 방지
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    @JsonIgnore // 이 필드를 직렬화에서 제외
-    private Member member;
-
-    @Column(name = "text")
+    private Long memberId;
     private String text;
-
-    @Column(name = "completed")
     private boolean completed;
-
-    @Column(name = "status")
     private boolean status;
-
-    @Column(name = "recorded_date")
     private LocalDate recordedDate;
 
-    @PrePersist //엔티티가 영속화되기 전에 호출
-    public void prePersist() {
-        recordedDate = LocalDate.now();
+    public TodoDTO() {
     }
 
-    public Todo() {
-    }
-
-    public Todo(Long id, Member member, String text, boolean completed, boolean status, LocalDate recordedDate) {
+    public TodoDTO(Long id, Long memberId, String text, boolean completed, boolean status, LocalDate recordedDate) {
         this.id = id;
-        this.member = member;
+        this.memberId = memberId;
         this.text = text;
         this.completed = completed;
         this.status = status;
@@ -56,12 +30,12 @@ public class Todo {
         this.id = id;
     }
 
-    public Member getMember() {
-        return member;
+    public Long getMemberId() {
+        return memberId;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 
     public String getText() {
@@ -98,9 +72,9 @@ public class Todo {
 
     @Override
     public String toString() {
-        return "Todo{" +
+        return "TodoDTO{" +
                 "id=" + id +
-                ", member=" + member +
+                ", memberId=" + memberId +
                 ", text='" + text + '\'' +
                 ", completed=" + completed +
                 ", status=" + status +

@@ -18,6 +18,4 @@ public interface RankingService {
     public List<MemberRankDTO> getAllRankingsWithRank();
     // 해당 개수만큼만 랭킹 데이터 가져오기, 서버에서 데이터 가공, 현재 사용 안함
     public List<Ranking> getTopHundredRanking(List<Ranking> rankingList);
-
-
 }

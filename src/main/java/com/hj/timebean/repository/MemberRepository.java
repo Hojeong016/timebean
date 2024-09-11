@@ -8,10 +8,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member,Integer> {
-
+    Optional<Member> findById(Long id);
     Member findByAccountId(String accountId); // Jpa query method
 
     //사용자 정의 쿼리

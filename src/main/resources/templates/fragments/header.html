@@ -7,10 +7,8 @@
 <div th:fragment="header">
   <div class="header">
     <div id="left">
-<!--      <input type="button" class="profile-button" onClick="location.href='/myPage/myPage'">-->
     </div>
     <div id="center">
-<!--      <img alt="main logo" id="mainLogo" src="/image/main_logo-icon.png" onClick="location.href='/mainPage'">-->
       <input type="button" class="main_logo-button" onClick="location.href='/'">
     </div>
     <div id="right">
@@ -25,11 +23,6 @@
                 <button class="signup-button" onclick="window.location.href='/myPage'">마이페이지</button>
             </div>
         </div>
-<!--      <input th:if="${session.memberInfo == null}" type="button" class="login-button" onClick="location.href='/login/loginPage'">-->
-<!--      <input th:if="${session.memberInfo != null}" type="button" class="logout-button" onClick="location.href='/login/logout'">-->
-<!--      <span th:if="${session.memberInfo != null}" th:text="${session.memberInfo.name}+'님'"></span>-->
-<!--      <input type="button" class="search-button" onclick="alert('검색창')">-->
-<!--      <input type="button" class="basket-button" onclick="alert('장바구니')">-->
     </div>
   </div>
 </div>

@@ -16,11 +16,6 @@ public interface RankingRepository extends JpaRepository<Ranking, Long> {
     List<Ranking> findByRecordedDate(LocalDate recordedDate);
     List<Ranking> findAll();
 
-//    @Query(value = "SELECT new com.hj.timebean.dto.MemberRankDTO(r.id, m.id, m.nickname, r.totalTime, r.recordedDate, " +
-//            "DENSE_RANK() OVER (ORDER BY r.totalTime DESC) as 'rank') " +
-//            "FROM Ranking r JOIN r.member m")
-//    @Query(value = "SELECT r.id, r.member_id, r.total_time, r.recorded_date, DENSE_RANK() OVER (ORDER BY r.total_time DESC) as 'rank' " +
-//            "FROM ranking r", nativeQuery = true)
     @Query(value = "SELECT r.id, m.id as member_id, m.nickname, r.total_time, r.recorded_date, " +
             "DENSE_RANK() OVER (ORDER BY r.total_time DESC) as 'rank' " +
             "FROM ranking r " +

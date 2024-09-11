@@ -135,7 +135,6 @@ tbody tr:hover {
     align-items: center;
 }
 .profile-image {
-    /*background: url("memberDetails.getProfileUrl()") no-repeat center center;*/
     background-size: cover; /* 이미지를 컨테이너에 꽉 차게 */
     width: 100%; /* 컨테이너에 맞게 너비 조정 */
     max-width: 110px; /* 최대 너비를 설정하여 너무 커지지 않게 함 */

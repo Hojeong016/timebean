@@ -94,6 +94,5 @@ public class RankingServiceImpl implements RankingService{
         }
 
         return memberRankDTO;
-//        return rankingRepository.findAllRankingsWithRank();
     }
 }
