@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     height: 100%;
+    min-height: 1200px;
     position: relative;
     background-color: #eeefcf;
     border-radius: 10px;

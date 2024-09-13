@@ -4,8 +4,10 @@ import com.hj.timebean.dto.SignUpDTO;
 import com.hj.timebean.dto.UpdateDTO;
 import com.hj.timebean.entity.Member;
 
-public interface MemberService {
+import java.util.Optional;
 
+public interface MemberService {
+    Optional<Member> findById(Long id);
     Member findByAccountId(String accountId);
     // 회원가입
     Member signUp(SignUpDTO signUpDTO);

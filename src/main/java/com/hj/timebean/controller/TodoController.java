@@ -37,28 +37,30 @@ public class TodoController {
             todoList = todoService.findByMemberIdAndStatus(memberId, true);
         }
 
-        return  todoList;
+        return todoList;
     }
 
-    @PostMapping("/todos")
-    public ResponseEntity<String> addTodo(@RequestBody TodoDTO todoRequest, Authentication authentication) {
+    @PostMapping("/addTodo")
+    public ResponseEntity<String> addTodo(@RequestParam("text") String text, Authentication authentication) {
+        TodoDTO todoDTO = new TodoDTO();
+
         if (authentication != null) {
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
             Long memberId = principalDetails.getMember().getId();
-            todoRequest.setMemberId(memberId);
+            todoDTO.setMemberId(memberId);
         }
+        todoDTO.setText(text);
 
-        todoRequest.setStatus(true);  // 할 일을 보이도록 status 설정
-        todoService.saveTodo(todoRequest);  // 저장
+        todoService.saveTodo(todoDTO);  // 저장
 
         return new ResponseEntity<>("Todo added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/todos/{id}")
-    public void updateTodoStatus(@PathVariable Long id, @RequestBody Todo todoRequest) {
+    public void updateTodoStatus(@PathVariable Long id, @RequestParam("completed") boolean completed) {
         Todo todo = todoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Todo not found with id: " + id));
-        todo.setCompleted(todoRequest.isCompleted());
+        todo.setCompleted(completed);
         todoRepository.save(todo);
     }
 
@@ -66,7 +68,7 @@ public class TodoController {
     public void deleteTodo(@PathVariable Long id) {
         Todo todo = todoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Todo not found with id: " + id));
-        todo.setStatus(false); // 삭제된 할 일은 목록에 보이지 않도록 status를 false로 설정
+        todo.setStatus(false);
         todoRepository.save(todo);
     }
 }

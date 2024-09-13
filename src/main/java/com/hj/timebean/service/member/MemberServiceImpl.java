@@ -1,21 +1,17 @@
 package com.hj.timebean.service.member;
 
-import com.hj.timebean.auth.PrincipalDetails;
 import com.hj.timebean.dto.SignUpDTO;
 import com.hj.timebean.dto.UpdateDTO;
 import com.hj.timebean.entity.Member;
 import com.hj.timebean.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Principal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -26,6 +22,11 @@ public class MemberServiceImpl implements MemberService {
     public MemberServiceImpl(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.memberRepository = memberRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
+    @Override
+    public Optional<Member> findById(Long id) {
+        return memberRepository.findById(id);
     }
 
     @Override

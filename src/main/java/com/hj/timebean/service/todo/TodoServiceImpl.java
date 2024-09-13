@@ -8,6 +8,7 @@ import com.hj.timebean.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -41,9 +42,9 @@ public class TodoServiceImpl implements TodoService{
         // TodoDTO를 엔티티로 변환
         Todo todo = new Todo();
         todo.setText(todoDTO.getText());
-        todo.setCompleted(todoDTO.isCompleted());
-        todo.setStatus(todoDTO.isStatus());
-        todo.setRecordedDate(todoDTO.getRecordedDate());
+        todo.setCompleted(false);
+        todo.setStatus(true);
+        todo.setRecordedDate(LocalDate.now());
 
         // Member ID를 통해 Member 엔티티를 조회하고 설정
         Member member = memberRepository.findById(todoDTO.getMemberId())

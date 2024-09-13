@@ -40,7 +40,7 @@ public class RankingServiceImpl implements RankingService{
     }
 
     @Override
-    @Cacheable(key = "'allRankings'", unless = "#result == null || #result.isEmpty()")
+    //@Cacheable(key = "'allRankings'", unless = "#result == null || #result.isEmpty()")
     public List<Ranking> findAll() {
         return rankingRepository.findAll();
     }
