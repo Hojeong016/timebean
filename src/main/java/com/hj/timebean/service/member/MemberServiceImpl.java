@@ -44,7 +44,9 @@ public class MemberServiceImpl implements MemberService {
         byte[] profile = member.getProfileImage();
         //Oauth 유저와 기본 프로필 유저일 경우 프로필 형식이 URL로 db에 저장 되있을 수 있다.
         if (profile != null) {
-            return Base64.getEncoder().encodeToString(profile);
+            String base64 = Base64.getEncoder().encodeToString(profile);
+            base64 = "data:image/png;base64," + base64;
+            return base64;
         } else {
             return member.getProfileUrl();
         }

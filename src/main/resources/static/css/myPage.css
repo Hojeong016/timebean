@@ -94,7 +94,18 @@ header {
     border-radius: 50%;
     margin-bottom: 10px;
 }
-
+.profile-url{
+    background-size: cover; /* 이미지를 컨테이너에 꽉 차게 */
+    width: 100%; /* 컨테이너에 맞게 너비 조정 */
+    max-width: 110px; /* 최대 너비를 설정하여 너무 커지지 않게 함 */
+    height: 100%; /* 높이를 자동으로 맞춤 */
+    max-height: 110px;
+    aspect-ratio: 1 / 1; /* 가로세로 비율을 1:1로 유지하여 원형 유지 */
+    border-radius: 50%; /* 원형 이미지 유지 */
+    object-fit: cover;
+    margin-bottom: 20px;
+    background-color: #ccc; /* 프로필 사진이 없는 경우를 대비한 배경색 */
+}
 /* 오버레이 텍스트 스타일 */
 .overlay {
     position: absolute;

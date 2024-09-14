@@ -30,6 +30,11 @@ public class MyPageController {
         Member member = memberService.findByAccountId(accountId);
         //html 에서 엔티티에 담긴 속성을 꺼내오기 위해 model 사용
         model.addAttribute("member", member);
+
+        String profile = memberService.getMemberPicture(principal.getName());
+        System.out.println("profile ="+ profile);
+        model.addAttribute("profile", profile);
+
         return "userPage/myPage";
     }
 
@@ -51,6 +56,8 @@ public class MyPageController {
         memberService.updateProfileImg(accountId,profileImg);
         return "redirect:/myPage";
     }
+
+
 
 
 }

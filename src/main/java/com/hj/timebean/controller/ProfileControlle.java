@@ -18,6 +18,9 @@ public class ProfileControlle {
 
     @GetMapping("/profile/view")
     public String profileView(Model model, Principal principal) {
-        return memberService.getMemberPicture(principal.getName());
+        String profile = memberService.getMemberPicture(principal.getName());
+        System.out.println("profile ="+ profile);
+        model.addAttribute("profile", profile);
+        return "userPage/myPage";
     }
 }

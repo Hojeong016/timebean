@@ -1,16 +1,16 @@
 package com.hj.timebean.common;
 
-import com.hj.timebean.OAuth.PrincipalOauth2UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import com.hj.timebean.OAuth.PrincipalOauth2UserService;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 @Configuration
 @EnableWebSecurity//시큐리티 황성화 -> 스프링 시큐리티 필터가 스프링 필터 체인에 등록이 된다. //secured 어노테이션 활성화
