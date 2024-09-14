@@ -29,10 +29,7 @@
         <div class="profile-pic-container">
           <!-- 프로필 사진 -->
           <div class="profile-image">
-           <!-- <img class="profile-url"
-                 th:src="'/profile/image'"
-                 alt="Profile Image" />-->
-              <img class="profile-url" th:src="${profile}" alt="Image"/>
+            <img class="profile-url" th:src="${profile != null ? profile : '../images/profile_image.png'}" alt="Image"/>
           </div>
           <div class="overlay">
             <span>프로필 변경하기</span>
@@ -47,17 +44,31 @@
       <p><span th:text="${member.nickname}"></span></p>
       <p><span th:text="${member.email}"></span></p>
       <p><strong>최종 정보 수정일:</strong> <span th:text="${member.updatedDate}"></span></p>
-      <button id="editBtn">수정하기</button>
 
+      <div>
+      <button id="editBtn">일반 정보 수정하기</button>
+      <button id="editTimerBtn">타이머 설정하기</button>
+      </div>
+      <!-- 일반 정보 수정 폼 -->
       <form action="/updateForm" method="post">
-        <div id="editForm" style="display: none;">
+        <div id="editForm" class="popup-form" style="display: none;">
           <input type="text" placeholder="이메일" name="email">
           <input type="password" placeholder="새 비밀번호" name="password">
           <input type="text" placeholder="닉네임" name="nickname">
-          <input type="password" placeholder="타이머 비밀번호" name="timerPassword">
           <p></p>
           <button type="submit">수정 완료</button>
-          <button id="cancelEditBtn">수정 취소</button>
+          <button type="button" class="cancelBtn">수정 취소</button>
+        </div>
+      </form>
+
+      <!-- 타이머 설정 폼 -->
+      <form action="/updateTimer" method="post">
+        <div id="timerForm" class="popup-form" style="display: none;">
+          <br/>
+          <input type="number" placeholder="타이머 비밀번호 설정" name="timerPassword">
+          <p></p>
+          <button type="submit">등록하기</button>
+          <button type="button" class="cancelBtn">취소</button>
         </div>
       </form>
     </div>
@@ -70,6 +81,7 @@
 </div>
 
 <script>
+  // '나의 정보'와 '나의 활동' 탭 전환
   document.getElementById("myInfoBtn").addEventListener("click", function() {
     document.getElementById("myInfo").style.display = "flex";
     document.getElementById("myActivity").style.display = "none";
@@ -80,19 +92,29 @@
     document.getElementById("myActivity").style.display = "flex";
   });
 
+  // 일반 정보 수정하기 버튼 클릭 시
   document.getElementById("editBtn").addEventListener("click", function() {
     document.getElementById("editForm").style.display = "block";
+    document.getElementById("timerForm").style.display = "none"; // 타이머 폼 숨기기
   });
 
-  document.getElementById("cancelEditBtn").addEventListener("click", function() {
-    document.getElementById("editForm").style.display = "none";
+  // 타이머 설정하기 버튼 클릭 시
+  document.getElementById("editTimerBtn").addEventListener("click", function() {
+    document.getElementById("timerForm").style.display = "block";
+    document.getElementById("editForm").style.display = "none"; // 일반 수정 폼 숨기기
+  });
+
+  // 취소 버튼 클릭 시 폼 닫기
+  document.querySelectorAll(".cancelBtn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      this.closest(".popup-form").style.display = "none"; // 해당 폼을 숨김
+    });
   });
 
   // 프로필 사진 클릭 시 파일 업로드 입력창 표시
   document.querySelector(".profile-pic-container .overlay").addEventListener("click", function() {
     document.getElementById("profilePicInput").click();
   });
-
 
   // 파일이 선택되면 업로드 버튼을 표시
   document.getElementById("profilePicInput").addEventListener("change", function() {
@@ -102,5 +124,6 @@
     }
   });
 </script>
+
 </body>
 </html>

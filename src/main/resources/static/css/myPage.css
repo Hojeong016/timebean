@@ -122,6 +122,10 @@ header {
     transition: opacity 0.3s ease;
     cursor: pointer;
     border-radius: 50%;
+    width: 100%;
+    max-width: 110px; /* 최대 너비를 설정하여 너무 커지지 않게 함 */
+    height: 100%; /* 높이를 자동으로 맞춤 */
+    max-height: 110px;
 }
 
 .profile-pic-container:hover .overlay {

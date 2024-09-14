@@ -1,18 +1,18 @@
 package com.hj.timebean.service.member;
 
 import com.hj.timebean.dto.SignUpDTO;
+import com.hj.timebean.dto.TimerUpdateDTO;
 import com.hj.timebean.dto.UpdateDTO;
 import com.hj.timebean.entity.Member;
 import com.hj.timebean.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.time.LocalDate;
-import java.util.Base64;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -77,18 +77,25 @@ public class MemberServiceImpl implements MemberService {
     //일반 로그인 회원 수정
     @Transactional
     @Override
-    public void update(UpdateDTO updateDTO) {
+    public void update(UpdateDTO updateDTO, Principal principal) {
         //인증 객체에 담겨있는 아이디를 꺼내 변수에 저장 getName();
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = principal.getName();
+        Member member = memberRepository.findByAccountId(username);
 
-        String encoderPassword = bCryptPasswordEncoder.encode(updateDTO.getPassword());
+        if (updateDTO.getEmail() != null && !updateDTO.getEmail().isEmpty() ) { member.setEmail(updateDTO.getEmail());}
+        if (updateDTO.getNickname() != null && !updateDTO.getNickname().isEmpty() ) { member.setNickname(updateDTO.getNickname());}
+        if (updateDTO.getPassword() != null && !updateDTO.getPassword().isEmpty()) {member.setPassword(bCryptPasswordEncoder.encode(updateDTO.getPassword()));}
 
-        int result = memberRepository.updateAllBy(username,
-                    updateDTO.getEmail(),
-                    encoderPassword,
-                    updateDTO.getNickname(),
-                    updateDTO.getTimerPassword(),
-                    LocalDate.now());
+        member.setUpdatedDate(LocalDate.now());
+
+        memberRepository.save(member);
+    }
+
+    @Transactional
+    @Override
+    public void timerUpdate(int password, Principal principal){
+        String accountId = principal.getName();
+        memberRepository.updateTimerPassword(accountId,password,LocalDate.now());
     }
 
     @Transactional

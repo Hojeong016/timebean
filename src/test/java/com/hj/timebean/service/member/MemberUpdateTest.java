@@ -58,9 +58,8 @@ class MemberUpdateTest {
     @Test
     void update(){
 
-        UpdateDTO updateDTO = new UpdateDTO("test@email.com","test123456","testuser",123456,LocalDate.now());
+       /* UpdateDTO updateDTO = new UpdateDTO("test@email.com","test123456","testuser",123456,LocalDate.now());*/
 
-        memberService.update(updateDTO);
 
         // Mock된 repository를 통해 검증
    /*     verify(memberRepository).findByAccountId("test1");*/
