@@ -1,9 +1,11 @@
 package com.hj.timebean.service.member;
 
 import com.hj.timebean.dto.SignUpDTO;
+import com.hj.timebean.dto.TimerUpdateDTO;
 import com.hj.timebean.dto.UpdateDTO;
 import com.hj.timebean.entity.Member;
 
+import java.security.Principal;
 import java.util.Optional;
 
 public interface MemberService {
@@ -13,7 +15,8 @@ public interface MemberService {
     // 회원가입
     Member signUp(SignUpDTO signUpDTO);
     //회원 정보 수정
-    void update(UpdateDTO updateDTO);
+    void update(UpdateDTO updateDTO, Principal principal);
+    void timerUpdate(int password, Principal principal);
     void updateProfileImg(String accountId,byte[] profileImg);
     // 아이디 중복 검사
     void existsByAccountId(SignUpDTO signUpDTO);

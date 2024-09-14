@@ -6,9 +6,7 @@ import com.hj.timebean.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -27,21 +25,29 @@ public class MyPageController {
     @GetMapping("/myPage")
     public String userPage(Model model, Principal principal) {
         String accountId = principal.getName();
+        //멤버의 프로필 이미지
+        String profile = memberService.getMemberPicture(accountId);
+        model.addAttribute("profile", profile);
+
+        //멤버의 정보
         Member member = memberService.findByAccountId(accountId);
         //html 에서 엔티티에 담긴 속성을 꺼내오기 위해 model 사용
         model.addAttribute("member", member);
-
-        String profile = memberService.getMemberPicture(principal.getName());
-        System.out.println("profile ="+ profile);
-        model.addAttribute("profile", profile);
-
         return "userPage/myPage";
     }
 
+    //기본 정보 수정
     @PostMapping("/updateForm")
-    public String myPage(UpdateDTO updateDTO){
-    memberService.update(updateDTO);
+    public String myPage( @ModelAttribute UpdateDTO updateDTO, Principal principal) {
+        memberService.update(updateDTO,principal);
     return "redirect:/myPage";
+    }
+
+    //타이머 정보 수정 및 타이머 등록
+    @PostMapping("updateTimer")
+    public String timerUpdate(@RequestParam int timerPassword, Principal principal) {
+       memberService.timerUpdate(timerPassword,principal);
+        return "redirect:/myPage";
     }
 
     @PostMapping("/updateProfile")
