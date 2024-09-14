@@ -30,15 +30,19 @@ public class RankingController {
         long startTime = System.currentTimeMillis(); // 코드 시작 시간
 
         // 캐시에서 랭킹 데이터를 조회
-        List<MemberRankDTO> rankings = rankingDisplayService.getCachedRankings();
+//        List<MemberRankDTO> rankings = rankingDisplayService.getCachedRankings();
+//
+//        if (rankings == null || rankings.isEmpty()) {
+//            System.out.println("캐시가 없어서 db에서 조회 중");
+//            // 상위 100명의 랭킹 조회
+//            rankings = rankingService.getAllRankingsWithRank();
+//        }
 
-        if (rankings == null || rankings.isEmpty()) {
-            System.out.println("캐시가 없어서 db에서 조회 중");
-            // 상위 100명의 랭킹 조회
-            rankings = rankingService.getAllRankingsWithRank();
-        }
-
-        model.addAttribute("memberRankList", rankings);
+//        model.addAttribute("memberRankList", rankings);
+        List<MemberRankDTO> list = rankingService.getAllRankingsWithRank();
+        System.out.println(list);
+        // 테스트용
+        model.addAttribute("memberRankList", list);
 
         // 사용자의 세션 정보가 있을 경우, 사용자 랭킹 정보 조회
         if (authentication != null) {
@@ -56,12 +60,19 @@ public class RankingController {
             Optional<Integer> rank = rankingDisplayService.findMemberRankFromCache(memberId);
 
             // 나의 랭킹 정보
-            myRankInfo.ifPresent(ranking -> model.addAttribute("myRankInfo", ranking));
+            if (myRankInfo == null || myRankInfo.isEmpty()) {
+                model.addAttribute("myRankInfo", "정보를 찾을 수 없습니다.");
+            } else {
+                myRankInfo.ifPresent(myRankDetail -> model.addAttribute("myRankInfo", myRankDetail));
+
+            }
+
 
             // 순위
-            rank.ifPresent(ranking -> model.addAttribute("rank", ranking+"등"));
-            if (rank.isEmpty()) {
+            if (rank == null || rank.isEmpty()) {
                 model.addAttribute("rank", "Top100에 들지 못하였습니다.");
+            } else {
+                rank.ifPresent(ranking -> model.addAttribute("rank", ranking + "등"));
             }
         }
 
