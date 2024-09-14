@@ -29,7 +29,9 @@
         <div class="profile-pic-container">
           <!-- 프로필 사진 -->
           <div class="profile-image">
-            <img class="profile-url" th:src="${member.getProfileImage()}" alt="Image"/>
+            <img class="profile-url"
+                 th:src="'/profile/image'"
+                 alt="Profile Image" />
           </div>
           <div class="overlay">
             <span>프로필 변경하기</span>

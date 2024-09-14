@@ -23,20 +23,9 @@ public class SignInController {
         @Autowired
         private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-   /* @GetMapping("/test/login")
-    public @ResponseBody String loginTest(Authentication authentication) {
-        System.out.println("testlogin======================");
-        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-        System.out.println("authentication:"+principalDetails.getUser());
-        return "세션정보확인";
-    }*/
-
         //일반 오어스 로그인 모두 다 한가지 타입으로 받아올 수 있다.
         @GetMapping("/user")
         public  @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-            System.out.println(principalDetails.getMember());
-            System.out.println();
             return "user";
         }
 

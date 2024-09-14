@@ -16,6 +16,7 @@ package com.hj.timebean.auth;
 import com.hj.timebean.entity.Member;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -46,8 +47,8 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
        // user.getRole(); // r런데 권한이 String 타입,,, 그래서 이 아이를 리턴 불가능 따라서 타입을 맞춰줘야한다.
         Collection<GrantedAuthority> collect = new ArrayList<GrantedAuthority>();
          //그럼 이제 스트링을 리펀할 수 있는 ,,, 메서드를 오버라이딩 할 수 있다..
-        collect.add(()->{ return member.getRole();});
-            return collect;
+        collect.add(new SimpleGrantedAuthority( member.getRole()));
+        return collect;
     }
 
     @Override

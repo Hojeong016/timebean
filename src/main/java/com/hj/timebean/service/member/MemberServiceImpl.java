@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.Optional;
 
 @Service
@@ -35,6 +36,19 @@ public class MemberServiceImpl implements MemberService {
         return member;
     }
 
+    //프로필 이미지 가져오기
+    @Override
+    public String getMemberPicture(String accountId) {
+        Member member = memberRepository.findByAccountId(accountId);
+
+        byte[] profile = member.getProfileImage();
+        //Oauth 유저와 기본 프로필 유저일 경우 프로필 형식이 URL로 db에 저장 되있을 수 있다.
+        if (profile != null) {
+            return Base64.getEncoder().encodeToString(profile);
+        } else {
+            return member.getProfileUrl();
+        }
+    }
     // 회원 가입 기능
     @Override
     public Member signUp(SignUpDTO signUpDTO) {

@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface MemberService {
     Optional<Member> findById(Long id);
     Member findByAccountId(String accountId);
+    String getMemberPicture(String accountId);
     // 회원가입
     Member signUp(SignUpDTO signUpDTO);
     //회원 정보 수정

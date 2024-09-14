@@ -14,7 +14,6 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member,Integer> {
     Optional<Member> findById(Long id);
     Member findByAccountId(String accountId); // Jpa query method
-
     //사용자 정의 쿼리
     @Modifying
     @Query("UPDATE Member SET  email = :email, password = :password, nickname = :nickname, timerPassword = :timerPassword, updatedDate =:updateTime WHERE accountId = :accountId")
