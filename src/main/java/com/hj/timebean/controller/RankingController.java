@@ -3,6 +3,7 @@ package com.hj.timebean.controller;
 import com.hj.timebean.auth.PrincipalDetails;
 import com.hj.timebean.dto.MemberRankDTO;
 import com.hj.timebean.entity.Ranking;
+import com.hj.timebean.service.member.MemberService;
 import com.hj.timebean.service.ranking.RankingDisplayService;
 import com.hj.timebean.service.ranking.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,13 @@ import java.util.Optional;
 public class RankingController {
     private final RankingService rankingService;
     private final RankingDisplayService rankingDisplayService;
+    private final MemberService memberService;
 
     @Autowired
-    public RankingController(RankingService rankingService, RankingDisplayService rankingDisplayService) {
+    public RankingController(RankingService rankingService, RankingDisplayService rankingDisplayService, MemberService memberService) {
         this.rankingService = rankingService;
         this.rankingDisplayService = rankingDisplayService;
+        this.memberService = memberService;
     }
 
     @GetMapping("/")
@@ -30,24 +33,28 @@ public class RankingController {
         long startTime = System.currentTimeMillis(); // 코드 시작 시간
 
         // 캐시에서 랭킹 데이터를 조회
-//        List<MemberRankDTO> rankings = rankingDisplayService.getCachedRankings();
-//
-//        if (rankings == null || rankings.isEmpty()) {
-//            System.out.println("캐시가 없어서 db에서 조회 중");
-//            // 상위 100명의 랭킹 조회
-//            rankings = rankingService.getAllRankingsWithRank();
-//        }
+        List<MemberRankDTO> rankings = rankingDisplayService.getCachedRankings();
 
-//        model.addAttribute("memberRankList", rankings);
+        if (rankings == null || rankings.isEmpty()) {
+            System.out.println("캐시가 없어서 db에서 조회 중");
+            // 상위 100명의 랭킹 조회
+            rankings = rankingService.getAllRankingsWithRank();
+        }
+
+        model.addAttribute("memberRankList", rankings);
         List<MemberRankDTO> list = rankingService.getAllRankingsWithRank();
-        System.out.println(list);
-        // 테스트용
-        model.addAttribute("memberRankList", list);
+//        System.out.println(list);
+//        // 테스트용
+//        model.addAttribute("memberRankList", list);
 
         // 사용자의 세션 정보가 있을 경우, 사용자 랭킹 정보 조회
         if (authentication != null) {
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
             Long memberId = principalDetails.getMember().getId();
+
+            String profileImage = memberService.getMemberPicture(principalDetails.getUsername());
+
+            principalDetails.getMember().setProfileUrl(profileImage);
 
             // 사용자 정보
             model.addAttribute("memberDetails", principalDetails.getMember());

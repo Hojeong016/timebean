@@ -15,7 +15,7 @@ public interface RankingService {
     public List<Ranking> findAll();
     // db에서 조회한 랭킹 데이터를 캐시에 저장하는 역할
     public List<MemberRankDTO> updateRankingsWithCachePut(List<Object[]> results);
-    // 전체 랭 가져오기
+    // 테스트용) 전체 랭크 가져오기
     public List<MemberRankDTO> getAllRankingsWithRank();
     //
     public Optional<MemberRankDTO> getUserRank(Long memberId);
