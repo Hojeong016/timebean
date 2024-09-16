@@ -1,4 +1,5 @@
 div.content {
     padding-top: 70px;
     height: 100%; /* 뷰포트 높이의 100% */
+    min-height: 1200px;
 }

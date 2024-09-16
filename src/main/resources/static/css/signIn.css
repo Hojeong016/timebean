@@ -65,3 +65,12 @@ body {
     border: none;
     padding: 0;
 }
+
+.googleLoginBtn {
+    background: url("../images/google.png") no-repeat;
+    background-size:contain;
+    width: 40px; /* 이미지 크기 설정 */
+    height: 40px;
+    cursor: pointer;
+    border: none; /* 버튼 테두리 제거 */
+}

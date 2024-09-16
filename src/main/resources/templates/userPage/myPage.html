@@ -1,129 +1,138 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Page</title>
-  <link rel="stylesheet" href="/css/myPage.css">
+  <link rel="stylesheet" href="/css/myPage.css" th:href="@{/css/myPage.css}">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // '나의 정보'와 '나의 활동' 탭 전환
+      document.getElementById("myInfoBtn").addEventListener("click", function () {
+        document.getElementById("myInfo").style.display = "flex";
+        document.getElementById("myActivity").style.display = "none";
+      });
+
+      document.getElementById("myActivityBtn").addEventListener("click", function () {
+        document.getElementById("myInfo").style.display = "none";
+        document.getElementById("myActivity").style.display = "flex";
+      });
+
+      // 일반 정보 수정하기 버튼 클릭 시
+      document.getElementById("editBtn").addEventListener("click", function () {
+        document.getElementById("editForm").style.display = "block";
+        document.getElementById("timerForm").style.display = "none"; // 타이머 폼 숨기기
+      });
+
+      // 타이머 설정하기 버튼 클릭 시
+      document.getElementById("editTimerBtn").addEventListener("click", function () {
+        document.getElementById("timerForm").style.display = "block";
+        document.getElementById("editForm").style.display = "none"; // 일반 수정 폼 숨기기
+      });
+
+      // 취소 버튼 클릭 시 폼 닫기
+      document.querySelectorAll("#cancelBtn, #cancelEditBtn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          this.closest(".popup-form").style.display = "none"; // 해당 폼을 숨김
+        });
+      });
+
+      // 프로필 사진 클릭 시 파일 업로드 입력창 표시
+      document.querySelector(".profile-pic-container .overlay").addEventListener("click", function () {
+        document.getElementById("profilePicInput").click();
+      });
+
+      // 파일이 선택되면 업로드 버튼을 표시
+      document.getElementById("profilePicInput").addEventListener("change", function () {
+        const uploadBtn = document.getElementById("uploadBtn");
+        if (this.files && this.files.length > 0) {
+          uploadBtn.style.display = "inline-block"; // 파일이 선택되면 버튼을 표시
+        }
+      });
+    });
+  </script>
+
 </head>
 <body>
+  <div layout:fragment="content" class="content">
+    <header>
+      My Page
+    </header>
 
-<header>
-  My Page
-</header>
-
-<div class="mypage-container">
-  <div class="menu">
-    <ul>
-      <li><a href="#" id="myInfoBtn">나의 정보</a></li>
-      <li><a href="#" id="myActivityBtn">나의 활동</a></li>
-    </ul>
-  </div>
-
-  <div class="content">
-    <div id="myInfo" class="content-section" th:if="${member != null}">
-
-      <h2>나의 정보</h2>
-
-      <form action="/updateProfile" method="post" enctype="multipart/form-data">
-        <div class="profile-pic-container">
-          <!-- 프로필 사진 -->
-          <div class="profile-image">
-            <img class="profile-url" th:src="${profile != null ? profile : '../images/profile_image.png'}" alt="Image"/>
-          </div>
-          <div class="overlay">
-            <span>프로필 변경하기</span>
-            <input type="file" id="profilePicInput" name="file" style="display: none;">
-          </div>
+    <div class="mypage-container">
+      <div id="left-myPage">
+        <div class="menu">
+          <ul>
+            <li><a href="#" id="myInfoBtn">나의 정보</a></li>
+            <li><a href="#" id="myActivityBtn">나의 활동</a></li>
+          </ul>
         </div>
-
-        <!-- 파일 선택 후 나타나는 업로드 버튼 -->
-        <button type="submit" id="uploadBtn" style="display: none;">업로드</button>
-      </form>
-
-      <p><span th:text="${member.nickname}"></span></p>
-      <p><span th:text="${member.email}"></span></p>
-      <p><strong>최종 정보 수정일:</strong> <span th:text="${member.updatedDate}"></span></p>
-
-      <div>
-      <button id="editBtn">일반 정보 수정하기</button>
-      <button id="editTimerBtn">타이머 설정하기</button>
       </div>
-      <!-- 일반 정보 수정 폼 -->
-      <form action="/updateForm" method="post">
-        <div id="editForm" class="popup-form" style="display: none;">
-          <input type="text" placeholder="이메일" name="email">
-          <input type="password" placeholder="새 비밀번호" name="password">
-          <input type="text" placeholder="닉네임" name="nickname">
-          <p></p>
-          <button type="submit">수정 완료</button>
-          <button type="button" class="cancelBtn">수정 취소</button>
-        </div>
-      </form>
+      <div id="center-myPage">
+        <div id="myInfo" class="content-section" th:if="${member != null}">
 
-      <!-- 타이머 설정 폼 -->
-      <form action="/updateTimer" method="post">
-        <div id="timerForm" class="popup-form" style="display: none;">
-          <br/>
-          <input type="number" placeholder="타이머 비밀번호 설정" name="timerPassword">
-          <p></p>
-          <button type="submit">등록하기</button>
-          <button type="button" class="cancelBtn">취소</button>
-        </div>
-      </form>
-    </div>
+          <h2>나의 정보</h2>
 
-    <div id="myActivity" class="content-section" style="display: none;">
-      <h2>나의 활동</h2>
-      <p>여기에 '나의 활동' 내용이 표시됩니다.</p>
+          <form action="/member/updateProfile" method="post" enctype="multipart/form-data">
+            <div class="profile-pic-container">
+              <!-- 프로필 사진 -->
+              <div class="profile-image">
+                <img class="profile-url" th:src="${profile != null ? profile : '../images/profile_image.png'}" alt="Image"/>
+              </div>
+              <div class="overlay">
+                <span>프로필 변경하기</span>
+                <input type="file" id="profilePicInput" name="file" style="display: none;">
+              </div>
+            </div>
+
+            <!-- 파일 선택 후 나타나는 업로드 버튼 -->
+            <button type="submit" class="button-myPage" id="uploadBtn" style="display: none;">업로드</button>
+          </form>
+
+          <p><span th:text="${member.nickname}"></span></p>
+          <p><span th:text="${member.email}"></span></p>
+          <p><strong>최종 정보 수정일:</strong> <span th:text="${member.updatedDate}"></span></p>
+
+          <div>
+          <button id="editBtn" class="button-myPage">일반 정보 수정하기</button>
+          <button id="editTimerBtn" class="button-myPage">타이머 설정하기</button>
+          </div>
+          <!-- 일반 정보 수정 폼 -->
+          <form action="/member/updateForm" method="post">
+            <div id="editForm" class="popup-form" style="display: none;">
+              <input type="text" class="input-myPage" placeholder="이메일" name="email">
+              <input type="password" class="input-myPage" placeholder="새 비밀번호" name="password">
+              <input type="text" class="input-myPage" placeholder="닉네임" name="nickname">
+              <p></p>
+              <button type="submit" class="button-myPage">수정 완료</button>
+              <button type="button" id="cancelEditBtn" class="button-myPage">수정 취소</button>
+            </div>
+          </form>
+
+          <!-- 타이머 설정 폼 -->
+          <form action="/member/updateTimer" method="post">
+            <div id="timerForm" class="popup-form" style="display: none;">
+              <br/>
+              <input type="password" class="input-timer-password-myPage" placeholder="타이머 비밀번호 설정" name="timerPassword">
+              <p></p>
+              <button type="submit" class="button-myPage">등록하기</button>
+              <button type="button" id="cancelBtn" class="button-myPage">취소</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="myActivity" class="content-section" style="display: none;">
+          <h2>나의 활동</h2>
+          <p>여기에 '나의 활동' 내용이 표시됩니다.</p>
+        </div>
+
+      </div>
+      <div id="right-myPage">
+      </div>
     </div>
   </div>
-</div>
-
-<script>
-  // '나의 정보'와 '나의 활동' 탭 전환
-  document.getElementById("myInfoBtn").addEventListener("click", function() {
-    document.getElementById("myInfo").style.display = "flex";
-    document.getElementById("myActivity").style.display = "none";
-  });
-
-  document.getElementById("myActivityBtn").addEventListener("click", function() {
-    document.getElementById("myInfo").style.display = "none";
-    document.getElementById("myActivity").style.display = "flex";
-  });
-
-  // 일반 정보 수정하기 버튼 클릭 시
-  document.getElementById("editBtn").addEventListener("click", function() {
-    document.getElementById("editForm").style.display = "block";
-    document.getElementById("timerForm").style.display = "none"; // 타이머 폼 숨기기
-  });
-
-  // 타이머 설정하기 버튼 클릭 시
-  document.getElementById("editTimerBtn").addEventListener("click", function() {
-    document.getElementById("timerForm").style.display = "block";
-    document.getElementById("editForm").style.display = "none"; // 일반 수정 폼 숨기기
-  });
-
-  // 취소 버튼 클릭 시 폼 닫기
-  document.querySelectorAll(".cancelBtn").forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      this.closest(".popup-form").style.display = "none"; // 해당 폼을 숨김
-    });
-  });
-
-  // 프로필 사진 클릭 시 파일 업로드 입력창 표시
-  document.querySelector(".profile-pic-container .overlay").addEventListener("click", function() {
-    document.getElementById("profilePicInput").click();
-  });
-
-  // 파일이 선택되면 업로드 버튼을 표시
-  document.getElementById("profilePicInput").addEventListener("change", function() {
-    const uploadBtn = document.getElementById("uploadBtn");
-    if (this.files && this.files.length > 0) {
-      uploadBtn.style.display = "inline-block"; // 파일이 선택되면 버튼을 표시
-    }
-  });
-</script>
-
 </body>
 </html>

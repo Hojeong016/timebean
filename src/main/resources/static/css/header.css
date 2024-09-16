@@ -18,19 +18,18 @@ div.header{
     overflow: hidden;
     /*width: calc(100% - 15px);*/
 }
-div#left{
+div#left-header{
     flex-basis: 25%;
     width: 25%;
     text-align: left;
-    /*margin-left: 20px;*/
 }
-div#center{
+div#center-header{
     flex-basis: 50%;
     width: 50%;
     max-height: 100%;
     text-align: center;
 }
-div#right{
+div#right-header{
     flex-basis: 25%;
     width: 25%;
     display: flex;
@@ -87,4 +86,3 @@ input.main_logo-button {
     height: 60px;
     width: 60px;
 }
-*/

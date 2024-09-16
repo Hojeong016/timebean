@@ -5,7 +5,20 @@ body {
     margin: 0;
     padding: 0;
 }
-
+div#left-myPage{
+    flex-basis: 25%;
+    width: 25%;
+}
+div#center-myPage{
+    flex-basis: 50%;
+    width: 50%;
+    max-height: 100%;
+    text-align: center;
+}
+div#right-myPage{
+    flex-basis: 25%;
+    width: 25%;
+}
 /* 입체감 있는 헤더 스타일 */
 header {
     background-color: #528057;
@@ -55,24 +68,18 @@ header {
     background-color: #3f6d4e;
 }
 
-/* 오른쪽 컨텐츠 블록 */
-.content {
-    flex-grow: 1;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-}
-
 /* 나의 정보와 나의 활동을 중앙에 정렬 */
 .content-section {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 400px;
+    min-height: 600px;
 }
 
 /* 제목 스타일 (나의 정보 / 나의 활동) */
@@ -140,7 +147,7 @@ header {
 }
 
 /* 입력 필드 스타일 */
-input {
+.input-myPage {
     width: 50%;
     padding: 10px;
     margin: 10px 0;
@@ -148,8 +155,15 @@ input {
     border-radius: 5px;
 }
 
+.input-timer-password-myPage {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 /* 버튼 스타일 */
-button {
+button.button-myPage {
     padding: 10px 20px;
     background-color: #528057;
     color: white;
@@ -159,19 +173,19 @@ button {
     margin-top: 15px;
 }
 
-button:hover {
+button.button-myPage:hover {
     background-color: #3f6d4e;
 }
 
 /* 수정 취소 버튼 스타일 */
-#cancelEditBtn {
-    margin-left: 10px;
-    background-color: #f44336;
-}
+/*#cancelEditBtn {*/
+/*    margin-left: 10px;*/
+/*    background-color: #f44336;*/
+/*}*/
 
-#cancelEditBtn:hover {
-    background-color: #d32f2f;
-}
+/*#cancelEditBtn:hover {*/
+/*    background-color: #d32f2f;*/
+/*}*/
 
 /* 수정 폼 스타일 */
 #editForm {
@@ -221,7 +235,7 @@ button:hover {
         margin-bottom: 20px;
     }
 
-    .content {
+    .profile-card {
         width: 100%;
     }
 

@@ -129,7 +129,7 @@ tbody tr:hover {
     margin-bottom: 40px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.memberDetailsIsNotNull, .memberDetailsIsNull {
+.memberIsNotNull, .memberIsNull {
     display: flex;
     flex-direction: column; /* 세로로 배치 */
     align-items: center;

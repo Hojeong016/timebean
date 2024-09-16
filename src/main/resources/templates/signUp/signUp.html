@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>회원가입</title>
-  <link rel="stylesheet" href="/css/signUp.css">
+  <link rel="stylesheet" href="/css/signUp.css" th:href="@{/css/signUp.css}">
 </head>
 <body>
 <div class="signup-form">
   <h2>회원가입</h2>
-  <form action="#" th th:action="@{/signUp/signUp}" th:object="${signUpDTO}" method="post">
+  <form action="#" th th:action="@{/member/signUp}" th:object="${signUpDTO}" method="post">
     <input type="text" th:field="*{accountId}" placeholder="아이디"><br>
     <div th:if="${#fields.hasErrors('accountId')}" th:errors="*{accountId}"></div><br>
 

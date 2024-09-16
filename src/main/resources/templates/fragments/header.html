@@ -4,27 +4,27 @@
   <title>header</title>
 </head>
 <body>
-<div th:fragment="header">
-  <div class="header">
-    <div id="left">
-    </div>
-    <div id="center">
-      <input type="button" class="main_logo-button" onClick="location.href='/'">
-    </div>
-    <div id="right">
-        <div class="sign">
-            <!-- 로그인 및 회원가입 버튼 -->
-            <div th:if="${memberDetails == null}">
-                <button class="signIn-button" onclick="window.location.href='/signIn/signIn'">로그인</button>
-                <button class="signup-button" onclick="window.location.href='/signUp/signUpView'">회원가입</button>
-            </div>
-            <div th:if="${memberDetails != null}">
-                <button class="signIn-button" onclick="window.location.href='/logout'">로그아웃</button>
-                <button class="signup-button" onclick="window.location.href='/myPage'">마이페이지</button>
+    <div th:fragment="header">
+      <div class="header">
+        <div id="left-header">
+        </div>
+        <div id="center-header">
+          <input type="button" class="main_logo-button" onClick="location.href='/ranking/'">
+        </div>
+        <div id="right-header">
+            <div class="sign">
+                <!-- 로그인 및 회원가입 버튼 -->
+                <div th:if="${member == null}">
+                    <button class="signIn-button" onclick="window.location.href='/member/signIn'">로그인</button>
+                    <button class="signup-button" onclick="window.location.href='/member/signUpView'">회원가입</button>
+                </div>
+                <div th:if="${member != null}">
+                    <button class="signIn-button" onclick="window.location.href='/member/logout'">로그아웃</button>
+                    <button class="signup-button" onclick="window.location.href='/member/myPage'">마이페이지</button>
+                </div>
             </div>
         </div>
+      </div>
     </div>
-  </div>
-</div>
 </body>
 </html>

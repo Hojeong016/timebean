@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="/css/signIn.css">
+    <link rel="stylesheet" href="/css/signIn.css" th:href="@{/css/signIn.css}">
 </head>
 <body>
 <div class="login-container">
     <h2>로그인</h2>
-    <form action="/signIn/signIn" method="post">
+    <form action="/member/signIn" method="post">
         <input type="text" class="input-field" placeholder="아이디" name="accountId">
         <input type="password" class="input-field" placeholder="비밀번호" name="password">
         <br>
@@ -17,15 +17,13 @@
         </br>
         <button type="submit" class="signIn-button">Sign In</button>
     </form>
-    <p>아직 회원이 아니신가요? <a href="/signUp/signUpView" class="signUp-button">회원가입</a></p>
+    <p>아직 회원이 아니신가요? <a href="/member/signUpView" class="signUp-button">회원가입</a></p>
 
     <!-- Google 로그인 버튼 추가 -->
     <div class="oauth-login-container">
+        <input type="button" onclick="window.location.href='/oauth2/authorization/google'" class="googleLoginBtn" id="googleLoginBtn">
         <button class="oauth-button">
-            <img src="../images/google.png" alt="Google Sign In" onclick="window.location.href='/oauth2/authorization/google'" id="googleLoginBtn">
-        </button>
-        <button class="oauth-button">
-            <img src="/images/naver.png" alt="Naver Sign In" onclick="window.location.href='/oauth2/authorization/naver'" id="naverLoginBtn">
+            <img src="/images/naver.png" alt="Naver Sign In" onclick="window.location.href='/oauth2/authorization/naver'" class="naverLoginBtn" id="naverLoginBtn">
         </button>
     </div>
 
